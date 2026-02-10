@@ -1,0 +1,8 @@
+@media only screen {
+	body {
+		background-color: #fff;
+	}
+	canvas {
+		background-color: #000;
+	}
+}
