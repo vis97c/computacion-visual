@@ -1,8 +1,16 @@
 @media only screen {
+	html,
+	body {
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+	}
 	body {
 		background-color: #fff;
+		margin: 0;
+		padding: 0;
 	}
 	canvas {
-		background-color: #000;
+		/* background-color: #000; */
 	}
 }
