@@ -1,0 +1,17 @@
+{
+	"parserOptions": {
+		"requireConfigFile": false,
+		"sourceType": "module"
+	},
+	"env": {
+		"node": true,
+		"browser": true
+	},
+	"extends": [
+		"@open-xamu-co/eslint-config",
+		"plugin:react/recommended"
+	],
+	"rules": {
+		"import/no-unresolved": "off"
+	}
+}

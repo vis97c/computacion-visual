@@ -1,0 +1,74 @@
+{
+  "name": "@vis97c/computacion-visual",
+  "version": "0.0.1",
+  "description": "Ejercicios del curso de computación visual",
+  "author": "@vis97c",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vis97c/computacion-visual.git"
+  },
+  "keywords": [
+    "computacion visual",
+    "modelado 3d",
+    "graficos por computadora"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vis97c/computacion-visual/issues"
+  },
+  "homepage": "https://github.com/vis97c/computacion-visual#readme",
+  "scripts": {
+    "lint:eslint": "eslint --ext .ts,.js,.vue --ignore-path .prettierignore .",
+    "lint:prettier": "prettier . --check --ignore-unknown",
+    "lint:stylelint": "node scripts/stylelint.cjs",
+    "lint": "yarn lint:eslint && yarn lint:prettier && yarn lint:stylelint",
+    "prepare": "node .husky/install.mjs"
+  },
+  "packageManager": "yarn@4.8.0",
+  "engines": {
+    "node": ">=20.19.3"
+  },
+  "workspaces": [
+    "semana_1_1_construyendo_mundo_3d/threejs"
+  ],
+  "devDependencies": {
+    "@open-xamu-co/eslint-config": "^3.0.1",
+    "@types/node": "^20.19.3",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-vue": "^9.15.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "stylelint": "^16.26.1",
+    "stylelint-config-recommended-scss": "^16.0.2",
+    "stylelint-config-recommended-vue": "^1.6.1",
+    "stylelint-config-standard-scss": "^16.0.0",
+    "stylelint-prettier": "^5.0.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.54.0",
+    "vite": "^7.3.1"
+  },
+  "lint-staged": {
+    "*.py": [
+      "prettier --write"
+    ],
+    "*.{ts,js,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}
