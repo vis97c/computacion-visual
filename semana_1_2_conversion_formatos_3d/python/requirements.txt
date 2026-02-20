@@ -1,0 +1,5 @@
+numpy
+matplotlib
+ipykernel
+plotly
+nbformat>=4.2.0
