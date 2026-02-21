@@ -56,8 +56,8 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/python.gif)
-![Three.js](media/threejs.gif)
+![Python](media/week-1-2-python.gif)
+![Three.js](media/week-1-2-threejs.gif)
 
 ## Prompts utilizados
 

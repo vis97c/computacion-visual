@@ -34,8 +34,8 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Unity](media/unity.gif)
-![Three.js](media/threejs.gif)
+![Unity](media/week-1-3-unity.gif)
+![Three.js](media/week-1-3-threejs.gif)
 
 ## Prompts utilizados
 

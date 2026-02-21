@@ -1,4 +1,4 @@
-# Taller Importando el Mundo: Visualización y Conversión de Formatos 3D
+# Taller Transformaciones
 
 Victor Saa
 
@@ -29,10 +29,10 @@ pip install -r requirements.txt
 
 ```bash
 # Registrar el kernel para Jupyter
-python -m ipykernel install --user --name semana2-visual --display-name "Python (semana2-visual)"
+python -m ipykernel install --user --name semana4-visual --display-name "Python (semana4-visual)"
 ```
 
-Abre `main.ipynb`, haz clic en el selector de kernel (arriba a la derecha) y elige **Python (semana2-visual)**.
+Abre `main.ipynb`, haz clic en el selector de kernel (arriba a la derecha) y elige **Python (semana4-visual)**.
 
 ### Three.js
 
@@ -56,23 +56,13 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/python-week-1.1.gif)
-![Three.js](media/threejs-week-1.1.gif)
+![Python](media/python-week-1.4.gif)
+![Three.js](media/threejs-week-1.4.gif)
 
 ## Prompts utilizados
 
-Como python no es mi fuerte, aca me ayude de "Antigravity" con `Claude Sonnet 4.6 Thinking` con este promt:
-
-```
-Vamos a modificar este notebook para cargar cube.obj y visualizar malla 3D con colores distintos para vértices, aristas y caras. También mostrar información estructural del modelo: número de vértices, aristas y caras. Nada de emojis ni cosas extra. Quiero un demostración muy básica.
-```
-
-Luego pedí interactividad con el cursor usando Plotly.
-
-Añadí algunos comentarios para entender mejor. y modifique las variables por camelCase simplemente por preferencia personal.
+Aca me ayude de Antigravity para crear los frames del gif y la escena del cubo en threejs.
 
 ## Aprendizajes
 
-Aunque ya había trabajado con Three.js con algunos ejercicios básicos tuve que investigar como extraer la geometría de un modelo y la parte del conteo (porque 12 caras?), otros extras fueron la integración con React y la librerías de three fiber. Igual solo seguí la documentación asi que por ahi bien. Ya tenia el scaffolding de otros proyectos y lo incluí porque hace muy comodo trabajar y estructural el código cuando ya esta configurado.
-
-No registre todo lo que busque, pero algunos recursos como [este](https://discourse.threejs.org/t/how-can-we-get-number-of-triangles-vertices-faces-of-glb-model/37064/2) fueron muy utiles
+Siento que aca hice algo de uso de lo que aprendi en algebra lineal, aunque solo fue aplicar las formulas de traslacion, rotacion y escala. Tambien familiarizarme mas con como operar con matrices en python.
