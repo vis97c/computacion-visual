@@ -6,21 +6,46 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import { Suspense, useMemo, useState } from "react";
 
 import "./App.css";
+import { Mesh, type MeshBasicMaterial, MeshStandardMaterial } from "three";
 
 function App() {
 	// Esto nos da un grupo con los objetos del modelo
-	const gatoObject = useLoader(STLLoader, "/dist/gato.stl");
+	const gatoGeometry = useLoader(STLLoader, "/dist/gato.stl");
 	const chimueloObject = useLoader(OBJLoader, "/dist/chimuelo.obj");
 	const saddamObject = useLoader(GLTFLoader, "/dist/saddam.gltf");
 	const [selectedModel, setSelectedModel] = useState<"gato" | "chimuelo" | "saddam">("gato");
 	const model = useMemo(() => {
 		switch (selectedModel) {
 			case "gato":
-				return gatoObject;
+				gatoGeometry.rotateY(10);
+
+				// Clone object with new material
+				const gato = new Mesh(gatoGeometry, new MeshStandardMaterial({ color: "red" }));
+
+				gato.translateX(50);
+				gato.translateY(-10);
+
+				return gato;
 			case "chimuelo":
 				return chimueloObject;
 			case "saddam":
-				return saddamObject;
+				const scene = saddamObject.scene.clone();
+
+				const child = scene.children[0].children[0];
+
+				child.rotateY(10);
+
+				// Change color of the mesh
+				if ("material" in child && child.material) {
+					(child.material as MeshBasicMaterial).color.set("red");
+				}
+
+				// Center the scene
+				scene.translateY(-10);
+				scene.translateX(20);
+				scene.translateZ(20);
+
+				return scene;
 		}
 	}, [selectedModel]);
 

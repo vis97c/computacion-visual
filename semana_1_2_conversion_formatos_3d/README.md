@@ -12,7 +12,7 @@ Este proyecto es una aplicación para transformar y analizar modelos 3D.
 
 ### Python
 
-Se utilizó jupyter notebook para la implementación. Se carga el objeto y se extrae la geometría, vertices y caras. Se utiliza matplotlib para la visualización.
+Se utilizó jupyter notebook para la implementación. Se carga los objetos y se analiza su estructura. Se visualizan y posteriormente se exportan a otros formatos con trimesh.
 
 ```bash
 # Crear el entorno virtual
@@ -36,7 +36,7 @@ Abre `main.ipynb`, haz clic en el selector de kernel (arriba a la derecha) y eli
 
 ### Three.js
 
-Se utilizó three.js para la implementación. Se carga el objeto y se extrae la geometría, vertices y caras. Se utiliza three fiber para la visualización.
+Se utilizó three.js para la implementación. Se cargan los objetos y se visualizan con three fiber.
 
 ```bash
 cd threejs
@@ -56,23 +56,13 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/python-week-1.1.gif)
-![Three.js](media/threejs-week-1.1.gif)
+![Python](media/python.gif)
+![Three.js](media/threejs.gif)
 
 ## Prompts utilizados
 
-Como python no es mi fuerte, aca me ayude de "Antigravity" con `Claude Sonnet 4.6 Thinking` con este promt:
-
-```
-Vamos a modificar este notebook para cargar cube.obj y visualizar malla 3D con colores distintos para vértices, aristas y caras. También mostrar información estructural del modelo: número de vértices, aristas y caras. Nada de emojis ni cosas extra. Quiero un demostración muy básica.
-```
-
-Luego pedí interactividad con el cursor usando Plotly.
-
-Añadí algunos comentarios para entender mejor. y modifique las variables por camelCase simplemente por preferencia personal.
+Se usaron prompt relacionados a la descomposición para el análisis de los modelos y la conversión de archivos.
 
 ## Aprendizajes
 
-Aunque ya había trabajado con Three.js con algunos ejercicios básicos tuve que investigar como extraer la geometría de un modelo y la parte del conteo (porque 12 caras?), otros extras fueron la integración con React y la librerías de three fiber. Igual solo seguí la documentación asi que por ahi bien. Ya tenia el scaffolding de otros proyectos y lo incluí porque hace muy comodo trabajar y estructural el código cuando ya esta configurado.
-
-No registre todo lo que busque, pero algunos recursos como [este](https://discourse.threejs.org/t/how-can-we-get-number-of-triangles-vertices-faces-of-glb-model/37064/2) fueron muy utiles
+Aca me toco investicar un poco mas en torno a los materiales y el uv mapping por que no lograba cargar las texturas de los modelos.
