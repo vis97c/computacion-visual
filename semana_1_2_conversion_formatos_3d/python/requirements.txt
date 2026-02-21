@@ -3,3 +3,5 @@ matplotlib
 ipykernel
 plotly
 nbformat>=4.2.0
+Pillow
+trimesh
