@@ -1,0 +1,36 @@
+# ── Carpetas generadas por Unity (se regeneran solas) ─────
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+UserSettings/
+MemoryCaptures/
+
+# ── Archivos de caché de Assets ───────────────────────────
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# ── Visual Studio ─────────────────────────────────────────
+.vs/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ── JetBrains Rider ───────────────────────────────────────
+.idea/
+*.booproj
+
+# ── Sistema operativo ─────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Archivos de crash ─────────────────────────────────────
+sysinfo.txt
+crashlytics-build.properties
