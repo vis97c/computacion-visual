@@ -1,0 +1,1 @@
+Esto es solo para versionar la carpeta unity, borrar este archivo al trabajar
