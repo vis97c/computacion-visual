@@ -10,29 +10,9 @@ DESCRIBIR EL TALLER
 
 ## Implementaciónes
 
-### Python
+### Unity
 
-DESCRIBIR IMPLEMENTACIÓN EN PYTHON
-
-```bash
-# Crear el entorno virtual
-python -m venv .venv
-
-# Activar el entorno virtual
-.venv\Scripts\activate
-
-# Instalar dependencias
-pip install -r requirements.txt
-```
-
-### Jupyter en el editor (VS Code, Antigravity, etc.)
-
-```bash
-# Registrar el kernel para Jupyter
-python -m ipykernel install --user --name semana3-4-visual --display-name "Python (semana3-4-visual)"
-```
-
-Abre `main.ipynb`, haz clic en el selector de kernel (arriba a la derecha) y elige **Python (semana3-4-visual)**.
+DESCRIBIR IMPLEMENTACIÓN EN UNITY
 
 ### Three.js
 

@@ -34,6 +34,10 @@ python -m ipykernel install --user --name semana3-3-visual --display-name "Pytho
 
 Abre `main.ipynb`, haz clic en el selector de kernel (arriba a la derecha) y elige **Python (semana3-3-visual)**.
 
+### Unity
+
+DESCRIBIR IMPLEMENTACIÓN EN UNITY
+
 ### Three.js
 
 DESCRIBIR IMPLEMENTACIÓN EN THREE.JS
