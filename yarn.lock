@@ -6035,6 +6035,48 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"semana-2-1@workspace:semana_2_1_espacios_proyectivos_matrices_proyeccion/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-2-1@workspace:semana_2_1_espacios_proyectivos_matrices_proyeccion/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
+"semana-2-2@workspace:semana_2_2_proyecciones_camara_virtual/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-2-2@workspace:semana_2_2_proyecciones_camara_virtual/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
+"semana-2-4@workspace:semana_2_4_transformaciones_homogeneas/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-2-4@workspace:semana_2_4_transformaciones_homogeneas/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
 "semana-3-2@workspace:semana_3_2_zbuffer_depth_testing/threejs":
   version: 0.0.0-use.local
   resolution: "semana-3-2@workspace:semana_3_2_zbuffer_depth_testing/threejs"
@@ -6057,6 +6099,7 @@ __metadata:
     "@react-three/drei": "npm:^10.7.7"
     "@react-three/fiber": "npm:^9.5.0"
     "@vitejs/plugin-react": "npm:^5.1.1"
+    leva: "npm:^0.10.1"
     react: "npm:^19.2.0"
     react-dom: "npm:^19.2.0"
     three: "npm:^0.182.0"
