@@ -66,11 +66,11 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Prompts utilizados
 
-Aca me ayude de Antigravity construir la escena base del sistema solar.
+Aca me ayude de Antigravity para construir la escena y el shader.
 
 ## Aprendizajes
 
-DESCRIBIR APRENDIZAJES
+Creo que el uso de shaders es una herramienta interesante para la visualizacion de los modelos.
 
 ## Contribuciones grupales (si aplica)
 

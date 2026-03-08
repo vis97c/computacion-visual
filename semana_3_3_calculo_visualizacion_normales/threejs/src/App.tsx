@@ -1,157 +1,179 @@
-import { useRef, useState, useMemo, Suspense } from "react";
+import { Suspense, useMemo, useRef, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, OrbitControls } from "@react-three/drei";
-import { Matrix4, Mesh, Group } from "three";
+import { Environment, OrbitControls, useHelper, Html } from "@react-three/drei";
+import * as THREE from "three";
+import { useControls } from "leva";
+// @ts-ignore
+import { VertexNormalsHelper } from "three/examples/jsm/helpers/VertexNormalsHelper.js";
 
 import "./App.css";
 
-function SolarSystem({
-	setActiveMatrix,
-}: {
-	activeMatrix: Matrix4;
-	setActiveMatrix: (matrix: Matrix4) => void;
-}) {
-	const sunRef = useRef<Group>(null!);
-	const earthPivotRef = useRef<Group>(null!);
-	const earthSystemRef = useRef<Mesh>(null!);
-	const moonPivotRef = useRef<Group>(null!);
-	const moonRef = useRef<Mesh>(null!);
-	const earthRef = useRef<Mesh>(null!);
+/**
+ * Shader para colorear según dirección de normal
+ */
+const NormalShader = {
+	uniforms: {
+		uTime: { value: 0 },
+	},
+	vertexShader: `
+    varying vec3 vNormal;
+    void main() {
+      vNormal = normalize(normalMatrix * normal);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+	fragmentShader: `
+    varying vec3 vNormal;
+    void main() {
+      vec3 color = vNormal * 0.5 + 0.5;
+      gl_FragColor = vec4(color, 1.0);
+    }
+  `,
+};
 
-	useFrame((state) => {
-		const time = state.clock.getElapsedTime();
+function ProceduralGeometryShowcase() {
+	const meshRef = useRef<THREE.Mesh>(null!);
+	const materialRef = useRef<THREE.ShaderMaterial>(null!);
 
-		// matrices temporales para cálculos manuales
-		const mTranslate = new Matrix4();
-		const mRotate = new Matrix4();
-
-		// 1. Transformación del Sol (Rotación sobre sí mismo)
-		sunRef.current.matrixAutoUpdate = false;
-		sunRef.current.matrix.copy(mRotate.makeRotationY(time * 0.2));
-		sunRef.current.updateMatrixWorld();
-
-		// 2.1. Transformación del Pivote de la Tierra (Traslación + Rotación = Orbita)
-		earthPivotRef.current.matrixAutoUpdate = false;
-		earthPivotRef.current.matrix.copy(mRotate.makeRotationY(time * 0.1));
-		earthPivotRef.current.updateMatrixWorld();
-
-		// 2.2. Transformación de la Tierra (Posición local respecto al Sol)
-		earthSystemRef.current.matrixAutoUpdate = false;
-		// Radio de órbita, composición de matrices
-		earthSystemRef.current.matrix
-			.copy(mTranslate.makeTranslation(5, 0, 0)) // Radio de órbita
-			.multiply(mRotate.makeRotationY(time * 2)); // Rotación sobre su propio eje
-		earthSystemRef.current.updateMatrixWorld();
-
-		// 2.3. Rotación de la Tierra (Local)
-		earthRef.current.matrixAutoUpdate = false;
-		earthRef.current.matrix.copy(mRotate.makeRotationY(time * 0.7));
-		earthRef.current.updateMatrixWorld();
-
-		// 3.1. Transformación del Pivote de la Luna (Sigue a la Tierra)
-		// La luna tiene bloqueo de marea respecto a la Tierra
-		moonPivotRef.current.matrixAutoUpdate = false;
-		moonPivotRef.current.matrix.copy(mRotate.makeRotationY(time * 0.1));
-		moonPivotRef.current.updateMatrixWorld();
-
-		// 3.2. Transformación de la Luna (Traslación local respecto a la Tierra)
-		moonRef.current.matrixAutoUpdate = false;
-		// Radio de órbita, composición de matrices
-		moonRef.current.matrix
-			.copy(mTranslate.makeTranslation(1.5, 0, 0)) // Distancia a la Tierra
-			.multiply(mRotate.makeRotationY(time * 0.1)); // Rotación sobre su propio eje, bloqueo de marea
-		moonRef.current.updateMatrixWorld();
-
-		// Actualizar matriz visualizada (Mundo de la Luna)
-		const worldMatrix = new Matrix4();
-
-		moonRef.current.applyMatrix4(worldMatrix);
-		setActiveMatrix(worldMatrix.clone());
+	const { shadingMode, amplitude, frequency, helpers } = useControls({
+		shadingMode: {
+			value: "smooth",
+			options: { Manual: "manual", Smooth: "smooth", Flat: "flat" },
+		},
+		amplitude: { value: 0.4, min: 0, max: 1, step: 0.01 },
+		frequency: { value: 2.0, min: 0, max: 10, step: 0.1 },
+		helpers: true,
 	});
 
+	/**
+	 * Geometría base (indexada)
+	 */
+	const baseGeometry = useMemo(() => {
+		const geo = new THREE.BufferGeometry();
+		const width = 4;
+		const height = 4;
+		const segments = 20;
+		const vertices: number[] = [];
+		const indices: number[] = [];
+
+		for (let i = 0; i <= segments; i++) {
+			for (let j = 0; j <= segments; j++) {
+				const x = (i / segments - 0.5) * width;
+				const y = (j / segments - 0.5) * height;
+				vertices.push(x, y, 0);
+			}
+		}
+
+		for (let i = 0; i < segments; i++) {
+			for (let j = 0; j < segments; j++) {
+				const a = i * (segments + 1) + j;
+				const b = (i + 1) * (segments + 1) + j;
+				const c = (i + 1) * (segments + 1) + (j + 1);
+				const d = i * (segments + 1) + (j + 1);
+				indices.push(a, b, d);
+				indices.push(b, c, d);
+			}
+		}
+
+		geo.setIndex(indices);
+		geo.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+		// Inicializar normales para evitar errores de undefined
+		geo.setAttribute("normal", new THREE.Float32BufferAttribute(new Float32Array(vertices.length), 3));
+		geo.computeVertexNormals();
+
+		return geo;
+	}, []);
+
+	// Sincronizar geometría según el modo
+	useEffect(() => {
+		if (shadingMode === "flat") {
+			const nonIndexed = baseGeometry.toNonIndexed();
+			nonIndexed.computeVertexNormals();
+			meshRef.current.geometry = nonIndexed;
+		} else {
+			meshRef.current.geometry = baseGeometry;
+		}
+	}, [shadingMode, baseGeometry]);
+
+	useFrame(({ clock }) => {
+		if (!meshRef.current) return;
+
+		const time = clock.getElapsedTime();
+		if (materialRef.current) materialRef.current.uniforms.uTime.value = time;
+
+		// IMPORTANTE: Trabajar siempre sobre la geometría ACTIVA del mesh
+		const geo = meshRef.current.geometry;
+		const posAttribute = geo.getAttribute("position");
+
+		/**
+		 * Modificar vértices en tiempo real
+		 */
+		for (let i = 0; i < posAttribute.count; i++) {
+			const x = posAttribute.getX(i);
+			const y = posAttribute.getY(i);
+			const z = Math.sin(x * frequency + time) * Math.cos(y * frequency + time) * amplitude;
+			posAttribute.setZ(i, z);
+		}
+		posAttribute.needsUpdate = true;
+
+		/**
+		 * Recalcular normales según el modo para que el helper y el shader se actualicen
+		 */
+		if (shadingMode !== "manual") {
+			geo.computeVertexNormals();
+		}
+	});
+
+	// Visualizar normales con VertexNormalsHelper
+	// Usamos helpers && meshRef.current?.geometry?.attributes?.normal para seguridad extra
+	const canShowHelper = helpers && meshRef.current?.geometry?.attributes?.normal;
+	useHelper(canShowHelper ? meshRef : null, VertexNormalsHelper, 0.3, 0x00ff00);
+
 	return (
-		<group ref={sunRef}>
-			{/* Sol */}
-			<mesh>
-				<sphereGeometry args={[1.5, 32, 32]} />
-				<meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={2} />
+		<group>
+			<mesh ref={meshRef}>
+				<shaderMaterial
+					ref={materialRef}
+					attach="material"
+					{...NormalShader}
+					side={THREE.DoubleSide}
+				/>
 			</mesh>
 
-			{/* Sistema Tierra (Hijo del Sol) */}
-			<group ref={earthPivotRef}>
-				<group ref={earthSystemRef}>
-					{/* Tierra */}
-					<group ref={earthRef}>
-						<mesh>
-							<sphereGeometry args={[0.5, 32, 32]} />
-							<meshStandardMaterial color="#3b82f6" roughness={0.3} />
-						</mesh>
-						<axesHelper args={[1.5]} />
-					</group>
-
-					{/* Sistema Luna (Hijo de la Tierra) */}
-					<group ref={moonPivotRef}>
-						<group ref={moonRef}>
-							<mesh>
-								{/* Luna */}
-								<sphereGeometry args={[0.25, 16, 16]} />
-								<meshStandardMaterial color="#94a3b8" />
-							</mesh>
-							<axesHelper args={[0.5]} />
-						</group>
-					</group>
-				</group>
-			</group>
-			<axesHelper args={[3]} />
+			<Html position={[0, 2.8, 0]} center>
+				<div
+					style={{
+						color: "white",
+						textAlign: "center",
+						textShadow: "0 2px 4px black",
+						pointerEvents: "none",
+						width: "500px",
+					}}
+				>
+					<h1 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>Cálculo de Normales</h1>
+					<p style={{ opacity: 0.8 }}>Geometría Procedural + Non-Indexed Shading</p>
+				</div>
+			</Html>
 		</group>
 	);
 }
 
 function App() {
-	const [activeMatrix, setActiveMatrix] = useState<Matrix4>(new Matrix4());
-	const elements = useMemo(() => activeMatrix.elements, [activeMatrix]);
-
 	return (
 		<main id="container">
-			<div className="overlay">
-				<h1>Sistemas de Coordenadas y Matrices</h1>
-				<p>Jerarquía: Sol → Tierra → Luna</p>
-			</div>
-
 			<section id="canvas-container">
-				<Canvas camera={{ position: [8, 8, 8], fov: 45 }}>
+				<Canvas camera={{ position: [4, 4, 4] }}>
 					<Suspense fallback={null}>
-						<pointLight position={[0, 0, 0]} intensity={20} color="#fff176" />
-
-						<SolarSystem
-							activeMatrix={activeMatrix}
-							setActiveMatrix={setActiveMatrix}
-						/>
-
+						<ProceduralGeometryShowcase />
 						<OrbitControls makeDefault />
-						<Environment preset="night" />
-						<gridHelper args={[20, 20, 0x333333, 0x111111]} position={[0, -2, 0]} />
+						<Environment preset="city" />
+						<gridHelper args={[10, 10]} rotation={[0, 0, 0]} />
 					</Suspense>
 				</Canvas>
-				<div className="matrix-panel">
-					<div className="label">Matriz de Transformación (Mundo)</div>
-					<div className="matrix-grid">
-						{Array.from(elements).map((val, i) => (
-							<span key={i} className="matrix-cell">
-								{val.toFixed(2)}
-							</span>
-						))}
-					</div>
-				</div>
 			</section>
-
-			<ul id="canvas-options">
-				<li>Transformaciones Manuales (Matrix4)</li>
-				<li>Jerarquía Anidada: World vs Local</li>
-				<li>Composición: T * R * S</li>
-			</ul>
 		</main>
 	);
 }
 
 export default App;
+
