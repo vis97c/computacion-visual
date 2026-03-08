@@ -6,7 +6,7 @@ Fecha de entrega: 09/03/2026
 
 ## Descripción
 
-DESCRIBIR EL TALLER
+Comprender el funcionamiento del Z-buffer (depth buffer) en el pipeline de renderizado 3D, implementarlo desde cero y explorar su configuración en motores gráficos modernos. Analizar problemas comunes como Z-fighting y precisión del depth buffer.
 
 ## Implementaciónes
 
@@ -40,7 +40,7 @@ DESCRIBIR IMPLEMENTACIÓN EN UNITY
 
 ### Three.js
 
-DESCRIBIR IMPLEMENTACIÓN EN THREE.JS
+Se utilizó three.js para la implementación. Se creo un shader personalizado y se implemento el z-buffer en una scena con multiples objetos. Se uso leva para controlar los parametros de la escena.
 
 ```bash
 cd threejs
@@ -62,7 +62,7 @@ IDE, prompts y autocompletado: Antigravity
 
 ![Python](media/python-week-3.3.gif)
 ![Unity](media/unity-week-3.3.gif)
-![Three.js](media/threejs-week-3.3.gif)
+![Three.js](media/week-3-2-threejs.gif)
 
 ## Prompts utilizados
 
@@ -74,7 +74,7 @@ DESCRIBIR APRENDIZAJES
 
 ## Contribuciones grupales (si aplica)
 
-Victor Saa: Desarrollo Python
+Victor Saa: Desarrollo Three.js
 
 ## Estructura del proyecto
 
