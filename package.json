@@ -33,7 +33,14 @@
     "semana_1_1_construyendo_mundo_3d/threejs",
     "semana_1_2_conversion_formatos_3d/threejs",
     "semana_1_3_jerarquias_transformaciones/threejs",
-    "semana_1_4_transformaciones/threejs"
+    "semana_2_1_espacios_proyectivos_matrices_proyeccion/threejs",
+    "semana_2_2_proyecciones_camara_virtual/threejs",
+    "semana_2_3_camara_pinhole_calibracion/threejs",
+    "semana_2_4_transformaciones_homogeneas/threejs",
+    "semana_1_4_transformaciones/threejs",
+    "semana_3_2_zbuffer_depth_testing/threejs",
+    "semana_3_3_calculo_visualizacion_normales/threejs",
+    "semana_3_4_etapas_pipeline_programable/threejs"
   ],
   "devDependencies": {
     "@open-xamu-co/eslint-config": "^3.0.1",
