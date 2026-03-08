@@ -6,7 +6,7 @@ Fecha de entrega: 09/03/2026
 
 ## Descripción
 
-DESCRIBIR EL TALLER
+Explorar las etapas programables del pipeline gráfico moderno (vertex shader, fragment shader, geometry shader), comprender su funcionamiento y crear shaders personalizados para cada etapa. Comparar con el pipeline de función fija y aprender técnicas de debugging.
 
 ## Implementaciónes
 
@@ -16,7 +16,7 @@ DESCRIBIR IMPLEMENTACIÓN EN UNITY
 
 ### Three.js
 
-DESCRIBIR IMPLEMENTACIÓN EN THREE.JS
+Se utilizó three.js para la implementación. Se generó una escena con una esfera. Se implementaron shaders personalizados (vertex shader, fragment shader, geometry shader) y post-procesado. Se utilizó leva para controlar los parámetros de la escena.
 
 ```bash
 cd threejs
@@ -37,7 +37,7 @@ IDE, prompts y autocompletado: Antigravity
 ## Resultados visuales
 
 ![Unity](media/unity-week-3.4.gif)
-![Three.js](media/threejs-week-3.4.gif)
+![Three.js](media/week-3-4-threejs.gif)
 
 ## Prompts utilizados
 
@@ -45,11 +45,11 @@ Aca me ayude de Antigravity construir la escena base del sistema solar.
 
 ## Aprendizajes
 
-DESCRIBIR APRENDIZAJES
+No conocia el lenguaje GLSL, tambien amplie mas mi percepcion de como los shaders pueden llegar a modificar la percepcion de los objetos en una escena 3D.
 
 ## Contribuciones grupales (si aplica)
 
-Victor Saa: Desarrollo Python
+Victor Saa: Desarrollo Three.js
 
 ## Estructura del proyecto
 

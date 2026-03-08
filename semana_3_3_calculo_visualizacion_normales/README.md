@@ -6,7 +6,7 @@ Fecha de entrega: 09/03/2026
 
 ## Descripción
 
-Comprender el funcionamiento del Z-buffer (depth buffer) en el pipeline de renderizado 3D, implementarlo desde cero y explorar su configuración en motores gráficos modernos. Analizar problemas comunes como Z-fighting y precisión del depth buffer.
+Calcular vectores normales de superficies 3D y utilizarlos para iluminación correcta. Comprender la diferencia entre normales de vértices y caras, smooth shading vs flat shading, y visualizar normales para debugging.
 
 ## Implementaciónes
 
