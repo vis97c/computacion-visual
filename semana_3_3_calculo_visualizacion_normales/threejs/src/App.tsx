@@ -18,7 +18,6 @@ const NormalShader = {
 	vertexShader: `
     varying vec3 vNormal;
     void main() {
-      // Pass the normal to the fragment shader
       vNormal = normalize(normalMatrix * normal);
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
@@ -26,7 +25,6 @@ const NormalShader = {
 	fragmentShader: `
     varying vec3 vNormal;
     void main() {
-      // Map normal direction (-1 to 1) to color (0 to 1)
       vec3 color = vNormal * 0.5 + 0.5;
       gl_FragColor = vec4(color, 1.0);
     }
@@ -48,11 +46,10 @@ function ProceduralGeometryShowcase() {
 	});
 
 	/**
-	 * Geometría procedural
+	 * Geometría base (indexada)
 	 */
 	const baseGeometry = useMemo(() => {
 		const geo = new THREE.BufferGeometry();
-
 		const width = 4;
 		const height = 4;
 		const segments = 20;
@@ -73,7 +70,6 @@ function ProceduralGeometryShowcase() {
 				const b = (i + 1) * (segments + 1) + j;
 				const c = (i + 1) * (segments + 1) + (j + 1);
 				const d = i * (segments + 1) + (j + 1);
-
 				indices.push(a, b, d);
 				indices.push(b, c, d);
 			}
@@ -81,48 +77,14 @@ function ProceduralGeometryShowcase() {
 
 		geo.setIndex(indices);
 		geo.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
-
-		/**
-		 * Normales calculadas manualmente (Initial Up)
-		 */
-		const normals = new Float32Array(vertices.length);
-		for (let i = 0; i < normals.length; i += 3) {
-			normals[i] = 0;
-			normals[i + 1] = 0;
-			normals[i + 2] = 1;
-		}
-		geo.setAttribute("normal", new THREE.Float32BufferAttribute(normals, 3));
+		// Inicializar normales para evitar errores de undefined
+		geo.setAttribute("normal", new THREE.Float32BufferAttribute(new Float32Array(vertices.length), 3));
+		geo.computeVertexNormals();
 
 		return geo;
 	}, []);
 
-	useFrame(({ clock }) => {
-		if (!meshRef.current) return;
-
-		const time = clock.getElapsedTime();
-
-		if (materialRef.current) materialRef.current.uniforms.uTime.value = time;
-
-		/**
-		 * Modificar vértices en tiempo real
-		 */
-		const posAttribute = baseGeometry.getAttribute("position");
-		for (let i = 0; i < posAttribute.count; i++) {
-			const x = posAttribute.getX(i);
-			const y = posAttribute.getY(i);
-			const z = Math.sin(x * frequency + time) * Math.cos(y * frequency + time) * amplitude;
-			posAttribute.setZ(i, z);
-		}
-		posAttribute.needsUpdate = true;
-
-		/**
-		 * Recalcular normales
-		 */
-		if (shadingMode === "smooth") {
-			baseGeometry.computeVertexNormals();
-		}
-	});
-
+	// Sincronizar geometría según el modo
 	useEffect(() => {
 		if (shadingMode === "flat") {
 			const nonIndexed = baseGeometry.toNonIndexed();
@@ -133,8 +95,39 @@ function ProceduralGeometryShowcase() {
 		}
 	}, [shadingMode, baseGeometry]);
 
+	useFrame(({ clock }) => {
+		if (!meshRef.current) return;
+
+		const time = clock.getElapsedTime();
+		if (materialRef.current) materialRef.current.uniforms.uTime.value = time;
+
+		// IMPORTANTE: Trabajar siempre sobre la geometría ACTIVA del mesh
+		const geo = meshRef.current.geometry;
+		const posAttribute = geo.getAttribute("position");
+
+		/**
+		 * Modificar vértices en tiempo real
+		 */
+		for (let i = 0; i < posAttribute.count; i++) {
+			const x = posAttribute.getX(i);
+			const y = posAttribute.getY(i);
+			const z = Math.sin(x * frequency + time) * Math.cos(y * frequency + time) * amplitude;
+			posAttribute.setZ(i, z);
+		}
+		posAttribute.needsUpdate = true;
+
+		/**
+		 * Recalcular normales según el modo para que el helper y el shader se actualicen
+		 */
+		if (shadingMode !== "manual") {
+			geo.computeVertexNormals();
+		}
+	});
+
 	// Visualizar normales con VertexNormalsHelper
-	useHelper(helpers ? meshRef : null, VertexNormalsHelper, 0.3, 0x00ff00);
+	// Usamos helpers && meshRef.current?.geometry?.attributes?.normal para seguridad extra
+	const canShowHelper = helpers && meshRef.current?.geometry?.attributes?.normal;
+	useHelper(canShowHelper ? meshRef : null, VertexNormalsHelper, 0.3, 0x00ff00);
 
 	return (
 		<group>
@@ -147,18 +140,18 @@ function ProceduralGeometryShowcase() {
 				/>
 			</mesh>
 
-			<Html position={[0, 2.5, 0]} center>
+			<Html position={[0, 2.8, 0]} center>
 				<div
 					style={{
 						color: "white",
 						textAlign: "center",
 						textShadow: "0 2px 4px black",
 						pointerEvents: "none",
-						width: "400px",
+						width: "500px",
 					}}
 				>
-					<h1>Visualización de Normales</h1>
-					<p>Usa el panel de Leva (derecha) para controlar la escena</p>
+					<h1 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>Cálculo de Normales</h1>
+					<p style={{ opacity: 0.8 }}>Geometría Procedural + Non-Indexed Shading</p>
 				</div>
 			</Html>
 		</group>
@@ -183,3 +176,4 @@ function App() {
 }
 
 export default App;
+

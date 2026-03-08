@@ -40,7 +40,7 @@ DESCRIBIR IMPLEMENTACIÓN EN UNITY
 
 ### Three.js
 
-Se utilizó three.js para la implementación. Se creo un shader personalizado y se implemento el z-buffer en una scena con multiples objetos. Se uso leva para controlar los parametros de la escena.
+Se utilizó three.js para la implementación. Se generó una geometría procedural y se calcularon las normales en tiempo real. Se uso un helper para visualizar las normales y leva para controlar los parámetros de la escena.
 
 ```bash
 cd threejs
@@ -62,15 +62,15 @@ IDE, prompts y autocompletado: Antigravity
 
 ![Python](media/python-week-3.3.gif)
 ![Unity](media/unity-week-3.3.gif)
-![Three.js](media/week-3-2-threejs.gif)
+![Three.js](media/week-3-3-threejs.gif)
 
 ## Prompts utilizados
 
-Aca me ayude de Antigravity construir la escena base del sistema solar.
+Aca me ayude de Antigravity para construir la escena, la geometria procedural e integrar el helper de normales.
 
 ## Aprendizajes
 
-DESCRIBIR APRENDIZAJES
+Aqui aprendi a trabajar con geometrias procedurales y a calcular normales en tiempo real sobre geomtrias dinamicas
 
 ## Contribuciones grupales (si aplica)
 
