@@ -106,50 +106,60 @@ A continuación se presentan las evidencias visuales obtenidas durante la implem
 ### Deformación y resultado general
 
 #### Onda sinusoidal
+
 ![Onda sinusoidal](media/onda_sinusoidal.gif)
 
-
 #### Resultado final del shader
+
 ![Resultado final del shader](media/final_debug.gif)
 
 ### Visualización de normales y coordenadas UV
 
 #### Depuración de normales
+
 ![Depuración de normales](media/normales_debug.gif)
 
 #### Depuración de normal
+
 ![Depuración de normal](media/normal_debug.gif)
 
 #### Depuración de UV
+
 ![Depuración de UV](media/uv_debug.gif)
 
 ### Visualización de espacios de transformación
 
 #### Depuración en view space
+
 ![Depuración en view space](media/view_debug.gif)
 
 #### Depuración en clip space
+
 ![Depuración en clip space](media/clip_debug.gif)
 
 ### Iluminación
 
 #### Depuración de Lambert
+
 ![Depuración de Lambert](media/lambert_debug.gif)
 
 ### Comparación de materiales
 
 #### Shader personalizado
+
 ![Shader personalizado](media/captura_custom_shader.png)
 
 #### Shader estándar
+
 ![Shader estándar](media/captura_standar_shader.png)
 
 ## Three.js
+
 ![Three.js](media/week-3-4-threejs.gif)
 
 ## Prompts utilizados
 
-Aca me ayude de Antigravity construir la escena base del sistema solar.
+Aca me ayude de Antigravity construir los shaders.
 
 ## Aprendizajes
 
