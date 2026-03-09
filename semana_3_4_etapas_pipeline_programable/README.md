@@ -1,6 +1,6 @@
 # Taller Etapas del Pipeline Programable
 
-Victor Saa, Juan Jose Alvarez, Juan Pablo Correa, Jose Arturo Herrera Rivera
+Victor Saa, Juan Jose Alvarez, Juan Pablo Correa, Jose Arturo Herrera Rivera, Manuel Santiago Mori Ardila
 
 Fecha de entrega: 09/03/2026
 

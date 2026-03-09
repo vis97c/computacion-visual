@@ -1,6 +1,6 @@
 # Taller Implementación de Z-Buffer y Depth Testing
 
-Victor Saa, Juan Jose Alvarez, Jose Arturo Herrera Rivera, Juan Pablo Correa
+Victor Saa, Juan Jose Alvarez, Jose Arturo Herrera Rivera, Juan Pablo Correa, Manuel Santiago Mori Ardila
 
 Fecha de entrega: 09/03/2026
 
