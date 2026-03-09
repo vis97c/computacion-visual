@@ -1,6 +1,6 @@
 # Taller Etapas del Pipeline Programable
 
-Victor Saa y
+Victor Saa, Juan Jose Alvarez
 
 Fecha de entrega: 09/03/2026
 
