@@ -1,6 +1,6 @@
 # Taller Cálculo y Visualización de Normales
 
-Victor Saa, Juan Jose Alvarez
+Victor Saa, Juan Jose Alvarez, Jose Arturo Herrera Rivera
 
 Fecha de entrega: 09/03/2026
 
