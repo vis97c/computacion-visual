@@ -1,46 +1,38 @@
 # Taller Implementación de Z-Buffer y Depth Testing
 
-Victor Saa y
+Victor Saa, Juan Jose Alvarez
 
 Fecha de entrega: 09/03/2026
 
 ## Descripción
 
-DESCRIBIR EL TALLER
+Implementación desde cero del algoritmo **Z-Buffer (Depth Testing)** para renderizado 3D correcto. El taller explora el problema de oclusión en gráficos por computadora, comparando el clásico Painter's Algorithm con la solución moderna del Z-buffer. Se implementa la proyección perspectiva, rasterización de triángulos con coordenadas baricéntricas, interpolación de profundidad por píxel, y se analizan problemas de precisión como el Z-fighting y el efecto del rango near/far.
 
 ## Implementaciónes
 
 ### Python
 
-DESCRIBIR IMPLEMENTACIÓN EN PYTHON
+Implementación completa en Jupyter Notebook (`python/main.ipynb`) usando únicamente `numpy` y `matplotlib`. Se construyó un pipeline de renderizado desde cero con los siguientes componentes:
 
-```bash
-# Crear el entorno virtual
-python -m venv .venv
-
-# Activar el entorno virtual
-.venv\Scripts\activate
-
-# Instalar dependencias
-pip install -r requirements.txt
-```
-
-### Jupyter en el editor (VS Code, Antigravity, etc.)
-
-```bash
-# Registrar el kernel para Jupyter
-python -m ipykernel install --user --name semana3-2-visual --display-name "Python (semana3-2-visual)"
-```
-
-Abre `main.ipynb`, haz clic en el selector de kernel (arriba a la derecha) y elige **Python (semana3-2-visual)**.
+- **Proyección perspectiva**: función `project_point()` que transforma vértices 3D `(X, Y, Z)` al plano de pantalla 2D usando la fórmula $x = f \cdot X/Z + c_x$.
+- **Coordenadas baricéntricas**: función `barycentric_coords()` para determinar si un píxel está dentro de un triángulo e interpolar la profundidad Z.
+- **Rasterizador sin Z-buffer**: implementación del Painter's Algorithm (`rasterize_no_zbuffer`) que pinta directamente sin test de profundidad, demostrando artefactos de oclusión.
+- **Rasterizador con Z-buffer**: implementación `rasterize_zbuffer()` que inicializa una matriz `float32` con `+∞` y actualiza un píxel solo si su Z interpolado es menor al valor almacenado.
+- **Visualización del Depth Buffer**: normalización del Z-buffer a [0,1] mostrado en escala de grises, plasma y turbo, con histograma de distribución de profundidades.
+- **Comparación cuantitativa**: mapas de error y métrica MAE entre métodos, demostrando que el Z-buffer produce resultados correctos independiente del orden de pintado.
+- **Análisis de precisión**: curvas de transformación NDC no lineal para distintos rangos near/far, y simulación de Z-fighting con superficies a separaciones ΔZ desde 0.5 hasta 0.0001.
 
 ### Unity
 
 DESCRIBIR IMPLEMENTACIÓN EN UNITY
 
+<!-- TODO: agregar descripción de implementación Unity -->
+
 ### Three.js
 
 DESCRIBIR IMPLEMENTACIÓN EN THREE.JS
+
+<!-- TODO: agregar descripción de implementación Three.js -->
 
 ```bash
 cd threejs
@@ -60,21 +52,85 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/python-week-3.2.gif)
 ![Unity](media/unity-week-3.2.gif)
 ![Three.js](media/threejs-week-3.2.gif)
+
+### Python
+
+![Painter's Algorithm vs Z-Buffer](media/01_painters_algorithm.png)
+![Z-Buffer Render](media/02_zbuffer_render.png)
+![Depth Buffer Visualization](media/03_depth_buffer_viz.png)
+![Comparison and Error Maps](media/04_comparison.png)
+![Precision and Near/Far Effect](media/05_precision_near_far.png)
+![Z-fighting Simulation](media/06_z_fighting.png)
+
+## Snippet de Python
+
+La implementación se basa en un pipeline de renderizado por software. Los fragmentos clave incluyen la proyección de puntos, el cálculo de coordenadas baricéntricas para la interpolación de profundidad y la lógica central del Z-buffer:
+
+```python
+def project_point(point_3d, focal_length=500, cx=400, cy=300):
+    """Proyecta punto 3D (X,Y,Z) al plano de pantalla 2D."""
+    X, Y, Z = point_3d
+    if Z <= 0:
+        return None  # Detrás de la cámara
+    px = int(focal_length * X / Z + cx)
+    py = int(focal_length * Y / Z + cy)
+    return (px, py)
+
+def barycentric_coords(px, py, v0, v1, v2):
+    """Calcula coordenadas baricéntricas para determinar pertenencia e interpolar Z."""
+    x0,y0 = v0;  x1,y1 = v1;  x2,y2 = v2
+    denom = (y1-y2)*(x0-x2) + (x2-x1)*(y0-y2)
+    if abs(denom) < 1e-10:
+        return -1, -1, -1   # Triángulo degenerado
+    l0 = ((y1-y2)*(px-x2) + (x2-x1)*(py-y2)) / denom
+    l1 = ((y2-y0)*(px-x2) + (x0-x2)*(py-y2)) / denom
+    l2 = 1.0 - l0 - l1
+    return l0, l1, l2
+
+def rasterize_zbuffer(image, zbuffer, pts_2d, depths, color):
+    """Rasteriza triángulo CON test de profundidad píxel a píxel."""
+    H, W = image.shape[:2]
+    v0, v1, v2 = pts_2d
+    z0, z1, z2 = depths
+    # Bounding box del triángulo
+    min_x = max(0,   int(min(v0[0], v1[0], v2[0])))
+    max_x = min(W-1, int(max(v0[0], v1[0], v2[0])))
+    min_y = max(0,   int(min(v0[1], v1[1], v2[1])))
+    max_y = min(H-1, int(max(v0[1], v1[1], v2[1])))
+    
+    for py in range(min_y, max_y + 1):
+        for px in range(min_x, max_x + 1):
+            l0, l1, l2 = barycentric_coords(px, py, v0, v1, v2)
+            if l0 >= 0 and l1 >= 0 and l2 >= 0:
+                # Interpolación baricéntrica de profundidad
+                z_interp = l0*z0 + l1*z1 + l2*z2
+                # TEST Z-BUFFER
+                if z_interp < zbuffer[py, px]:
+                    zbuffer[py, px] = z_interp   # Actualizar profundidad
+                    image[py, px]   = color       # Pintar color
+```
 
 ## Prompts utilizados
 
 Aca me ayude de Antigravity para construir la escena y el shader.
 
+Mediante Claude se ayudo a entender los conceptos de Z-buffer y depth testing, apoyando la creacion del Notebook de Python.
+
 ## Aprendizajes
 
-Creo que el uso de shaders es una herramienta interesante para la visualizacion de los modelos.
+- El **Z-buffer** resuelve correctamente la oclusión para cualquier geometría, incluyendo triángulos entrelazados que el Painter's Algorithm no puede manejar.
+- La **independencia del orden de pintado** es la ventaja clave del Z-buffer: se obtiene el mismo resultado sin importar el orden en que se procesen los triángulos.
+- La **interpolación baricéntrica** es fundamental: sin ella no es posible calcular la profundidad correcta en cada píxel interior del triángulo.
+- La transformación Z a NDC es **no lineal**: la mayoría de la precisión float32 se concentra cerca de la cámara. Un rango near/far muy amplio degrada severamente la precisión en objetos lejanos.
+- El **Z-fighting** es un problema real de precisión numérica: con `float32`, superficies separadas por ΔZ < 0.001 producen artefactos visuales de ruido, ya que los tests Z se vuelven inconsistentes píxel a píxel.
+- Creo que el uso de shaders es una herramienta interesante para la visualizacion de los modelos.
 
 ## Contribuciones grupales (si aplica)
 
-Victor Saa: Desarrollo Python
+Victor Saa: Desarrollo threejs
+Juan Jose Alvarez: Desarrollo Python
 
 ## Estructura del proyecto
 
