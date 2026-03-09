@@ -1,6 +1,6 @@
 # Taller Algoritmos Rasterizacion Basica
 
-**Estudiante:** Victor Saa, Juan Jose Alvarez
+**Estudiante:** Victor Saa, Juan Jose Alvarez, Jose Arturo Herrera Rivera
 **Fecha de entrega:** 09 de marzo de 2026  
 
 ---
