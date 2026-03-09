@@ -53,7 +53,9 @@ def check_outward_normals(vertices, faces, face_normals):
 
 ### Unity
 
-DESCRIBIR IMPLEMENTACIÓN EN UNITY
+Se implementó un componente en C# encargado de extraer los datos del MeshFilter. El núcleo del código utiliza un bucle que recorre el arreglo de vértices y transforma sus coordenadas de Espacio de Objeto a Espacio de Mundo para una representación precisa.
+
+Para complementar la visualización de líneas, se desarrolló un Shader personalizado utilizando la herramienta visual Shader Graph de Unity. El objetivo fue crear un material de diagnóstico que permitiera inspeccionar la orientación de todas las caras del modelo de forma simultánea.
 
 ### Three.js
 
@@ -88,7 +90,7 @@ IDE, prompts y autocompletado: Antigravity
 *Comparativa de intensidades Lambertianas: Flat vs Smooth Shading.*
 
 ### Unity
-![Unity](media/unity-week-3.3.gif)
+![Unity](media/week-3-3-unity.gif)
 
 ### Three.js
 ![Three.js](media/week-3-3-threejs.gif)
