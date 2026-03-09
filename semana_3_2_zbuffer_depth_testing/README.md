@@ -24,9 +24,18 @@ Implementación completa en Jupyter Notebook (`python/main.ipynb`) usando única
 
 ### Unity
 
-DESCRIBIR IMPLEMENTACIÓN EN UNITY
+Se desarrolló un shader personalizado para mapear la profundidad del espacio de clip a un valor escalar visible (escala de grises).
+Fragment Shader: La clave reside en la macro de Unity 
+```UNITY_Z_0_FAR_FROM_CLIPSPACE(i.vertex.z)``` (Codigo en el snippet de Unity)
+Esta función normaliza la posición Z del objeto en un rango [0, 1]. Un valor de 0 (negro) representa el Near Plane, mientras que 1 (blanco) representa el Far Plane.
 
-<!-- TODO: agregar descripción de implementación Unity -->
+Tambien se implementó un controlador en C# utilizando el Input System Package para manipular la cámara en tiempo real sin salir del modo Play.
+
+Movimiento (Eje Z): Permite observar cómo el valor de profundidad cambia dinámicamente según la posición del observador (teclas W/S).
+
+Manipulación FarClip (Teclas A/D): El script modifica el atributo cam.farClipPlane.
+
+Punto crítico: Al reducir el farClipPlane con la tecla A, se hace más preciso para resolver el Z-fighting.
 
 ### Three.js
 
@@ -52,7 +61,7 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Unity](media/unity-week-3.2.gif)
+![Unity](media/week_3_2_Unity.gif)
 ![Three.js](media/threejs-week-3.2.gif)
 
 ### Python
@@ -110,6 +119,12 @@ def rasterize_zbuffer(image, zbuffer, pts_2d, depths, color):
                 if z_interp < zbuffer[py, px]:
                     zbuffer[py, px] = z_interp   # Actualizar profundidad
                     image[py, px]   = color       # Pintar color
+```
+
+## Snippet de Unity
+```
+C++float depth = UNITY_Z_0_FAR_FROM_CLIPSPACE(i.vertex.z);
+return float4(depth, depth, depth, 1.0);
 ```
 
 ## Prompts utilizados
