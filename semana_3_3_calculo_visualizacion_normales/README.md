@@ -1,6 +1,6 @@
 # Taller Cálculo y Visualización de Normales
 
-Victor Saa y
+Victor Saa, Juan Jose Alvarez
 
 Fecha de entrega: 09/03/2026
 
@@ -12,27 +12,44 @@ Calcular vectores normales de superficies 3D y utilizarlos para iluminación cor
 
 ### Python
 
-DESCRIBIR IMPLEMENTACIÓN EN PYTHON
+La implementación en Python se enfoca en el procesamiento de mallas 3D utilizando **NumPy** para cálculos vectoriales de alto rendimiento y **Trimesh** para la carga y gestión de archivos `.obj`.
 
-```bash
-# Crear el entorno virtual
-python -m venv .venv
+#### Detalles Técnicos:
+- **Cálculo de Normales de Caras**: Se implementó manualmente mediante el producto cruz de los vectores de las aristas de cada triángulo:
+  $$\vec{n} = \frac{(B-A) \times (C-A)}{\|(B-A) \times (C-A)\|}$$
+- **Validación de Orientación**: Se verifica que las normales apunten hacia "afuera" comparando el producto punto entre la normal y el vector que va desde el centroide de la malla hacia el centroide de la cara.
+- **Normales de Vértices**: Se calculan promediando las normales de las caras adyacentes a cada vértice, permitiendo la implementación de **Smooth Shading**.
+- **Análisis Estadístico**: El script genera histogramas de la intensidad de iluminación (Lambertian) para comparar la distribución de luz entre sombreado plano (*Flat*) y suavizado (*Smooth*).
 
-# Activar el entorno virtual
-.venv\Scripts\activate
+#### Snippets de Código:
 
-# Instalar dependencias
-pip install -r requirements.txt
+```python
+# Cálculo manual de normales de caras
+def compute_face_normals(vertices, faces):
+    A = vertices[faces[:, 0]]
+    B = vertices[faces[:, 1]]
+    C = vertices[faces[:, 2]]
+
+    v1 = B - A
+    v2 = C - A
+
+    cross = np.cross(v1, v2)
+    norms = np.linalg.norm(cross, axis=1, keepdims=True)
+    
+    # Evitar división por cero
+    safe_norms = np.where(norms == 0, 1e-10, norms)
+    normals = cross / safe_norms
+    return normals
+
+# Validación de orientación (hacia afuera)
+def check_outward_normals(vertices, faces, face_normals):
+    centroids_f = (vertices[faces[:, 0]] + vertices[faces[:, 1]] + vertices[faces[:, 2]]) / 3.0
+    mesh_centroid = vertices.mean(axis=0)
+    outward_vec = centroids_f - mesh_centroid
+    dot = np.sum(outward_vec * face_normals, axis=1)
+    return (dot > 0).sum() # Conteo de normales correctas
 ```
 
-### Jupyter en el editor (VS Code, Antigravity, etc.)
-
-```bash
-# Registrar el kernel para Jupyter
-python -m ipykernel install --user --name semana3-3-visual --display-name "Python (semana3-3-visual)"
-```
-
-Abre `main.ipynb`, haz clic en el selector de kernel (arriba a la derecha) y elige **Python (semana3-3-visual)**.
 
 ### Unity
 
@@ -60,9 +77,23 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/python-week-3.3.gif)
+### Python
+![Normales de Caras](media/Normales%20de%20Caras.png)
+*Visualización de vectores normales calculados sobre el modelo.*
+
+![Validación de Anomalías](media/Anomalias%20en%20normales.png)
+*Mapa de calor mostrando errores de magnitud y orientación.*
+
+![Análisis Estadístico](media/Analisis%20Estadistico%20Intensidades.png)
+*Comparativa de intensidades Lambertianas: Flat vs Smooth Shading.*
+
+### Unity
 ![Unity](media/unity-week-3.3.gif)
+
+### Three.js
 ![Three.js](media/week-3-3-threejs.gif)
+
+
 
 ## Prompts utilizados
 
@@ -75,6 +106,7 @@ Aqui aprendi a trabajar con geometrias procedurales y a calcular normales en tie
 ## Contribuciones grupales (si aplica)
 
 Victor Saa: Desarrollo Three.js
+Juan Jose Alvarez: Desarrollo Python
 
 ## Estructura del proyecto
 
