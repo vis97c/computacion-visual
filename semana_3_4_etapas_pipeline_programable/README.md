@@ -97,7 +97,43 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Unity](media/unity-week-3.4.gif)
+## Resultados visuales
+
+### Unity
+
+A continuación se presentan las evidencias visuales obtenidas durante la implementación y depuración del shader en Unity. Estas capturas y animaciones permiten observar tanto la deformación geométrica aplicada en el vertex shader como la visualización de valores intermedios en el fragment shader.
+
+### Deformación y resultado general
+
+![Onda sinusoidal](media/onda_sinusoidal.gif)
+
+![Resultado final del shader](media/final_debug.gif)
+
+### Visualización de normales y coordenadas UV
+
+![Depuración de normales](media/normales_debug.gif)
+
+![Depuración de normal](media/normal_debug.gif)
+
+![Depuración de UV](media/uv_debug.gif)
+
+### Visualización de espacios de transformación
+
+![Depuración en view space](media/view_debug.gif)
+
+![Depuración en clip space](media/clip_debug.gif)
+
+### Iluminación
+
+![Depuración de Lambert](media/lambert_debug.gif)
+
+### Comparación de materiales
+
+![Shader personalizado](media/captura_custom_shader.png)
+
+![Shader estándar](media/captura_standar_shader.png)
+
+## Three.js
 ![Three.js](media/week-3-4-threejs.gif)
 
 ## Prompts utilizados
