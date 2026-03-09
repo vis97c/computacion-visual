@@ -153,6 +153,8 @@ Aca me ayude de Antigravity construir la escena base del sistema solar.
 
 ## Aprendizajes
 
+Durante esta práctica el grupo comprendió de forma mucho más clara cómo funciona el pipeline gráfico programable en Unity. Se pudo ver que el vertex shader no solo transforma geometría, sino que también permite deformarla y enviar información clave al fragment shader. A su vez, el fragment shader demostró cómo calcular color por píxel combinando textura, iluminación y efectos procedurales. También se reforzó la importancia de trabajar correctamente con los distintos espacios de transformación: object, world, view y clip. Finalmente, el uso de herramientas de depuración como `DebugMode` y Frame Debugger permitió entender mejor el renderizado y detectar errores con mayor facilidad.
+
 No conocia el lenguaje GLSL, tambien amplie mas mi percepcion de como los shaders pueden llegar a modificar la percepcion de los objetos en una escena 3D.
 
 ## Contribuciones grupales (si aplica)
@@ -166,7 +168,17 @@ Juan Pablo Correa: Desarrollo Unity
 semana_3_4_etapas_pipeline_programable/
 ├── unity/
 ├── threejs/
-├── media/ # Imágenes, videos, GIFs de resultados
+├── media/
+|    ├── onda_sinusoidal.gif
+|    ├── normales_debug.gif
+|    ├── uv_debug.gif
+|    ├── normal_debug.gif
+|    ├── view_debug.gif
+|    ├── clip_debug.gif
+|    ├── lambert_debug.gif
+|    ├── final_debug.gif
+|    ├── captura_custom_shader.png
+|    └── captura_standar_shader.png
 └── README.md
 ```
 
