@@ -6168,6 +6168,142 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"semana-4-1@workspace:semana_4_1_luces_sombras_radiometria/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-4-1@workspace:semana_4_1_luces_sombras_radiometria/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@react-three/postprocessing": "npm:^3.0.4"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    leva: "npm:^0.10.1"
+    postprocessing: "npm:^6.38.3"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
+"semana-4-2@workspace:semana_4_2_modelos_color_percepcion/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-4-2@workspace:semana_4_2_modelos_color_percepcion/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@react-three/postprocessing": "npm:^3.0.4"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    leva: "npm:^0.10.1"
+    postprocessing: "npm:^6.38.3"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
+"semana-4-3@workspace:semana_4_3_modelos_reflexion_pbr/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-4-3@workspace:semana_4_3_modelos_reflexion_pbr/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@react-three/postprocessing": "npm:^3.0.4"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    leva: "npm:^0.10.1"
+    postprocessing: "npm:^6.38.3"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
+"semana-5-1@workspace:semana_5_1_materiales_pbr_unity_threejs/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-5-1@workspace:semana_5_1_materiales_pbr_unity_threejs/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@react-three/postprocessing": "npm:^3.0.4"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    leva: "npm:^0.10.1"
+    postprocessing: "npm:^6.38.3"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
+"semana-5-2@workspace:semana_5_2_modelado_procedural_basico/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-5-2@workspace:semana_5_2_modelado_procedural_basico/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@react-three/postprocessing": "npm:^3.0.4"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    leva: "npm:^0.10.1"
+    postprocessing: "npm:^6.38.3"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
+"semana-5-3@workspace:semana_5_3_shaders_basicos_unity_threejs/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-5-3@workspace:semana_5_3_shaders_basicos_unity_threejs/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@react-three/postprocessing": "npm:^3.0.4"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    leva: "npm:^0.10.1"
+    postprocessing: "npm:^6.38.3"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
+"semana-5-4@workspace:semana_5_4_texturizado_dinamico_shaders_particulas/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-5-4@workspace:semana_5_4_texturizado_dinamico_shaders_particulas/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@react-three/postprocessing": "npm:^3.0.4"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    leva: "npm:^0.10.1"
+    postprocessing: "npm:^6.38.3"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
+"semana-5-5@workspace:semana_5_5_uv_mapping_texturas/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-5-5@workspace:semana_5_5_uv_mapping_texturas/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@react-three/postprocessing": "npm:^3.0.4"
+    "@vitejs/plugin-react": "npm:^5.1.1"
+    leva: "npm:^0.10.1"
+    postprocessing: "npm:^6.38.3"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
 "semver@npm:^6.3.1":
   version: 6.3.1
   resolution: "semver@npm:6.3.1"
