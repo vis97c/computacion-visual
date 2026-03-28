@@ -10,7 +10,7 @@ Fecha de entrega: 2026-03-28
 
 El objetivo de este taller fue trabajar con diferentes espacios de color (RGB, HSV, HSL, LAB, CIE YCrCb), realizar conversiones entre ellos y aplicarlos en tareas prácticas de procesamiento de imágenes: segmentación por color, manipulación de tonos, color grading cinematográfico, extracción de paletas con K-means y análisis de histogramas con ecualización adaptativa.
 
-La implementación se realizó completamente en Python utilizando OpenCV para las conversiones y operaciones sobre imágenes, scikit-image para funciones auxiliares, scikit-learn para el clustering K-means en la extracción de paletas, y Matplotlib para todas las visualizaciones. Se generó una imagen de prueba sintética con regiones cromáticas bien definidas (cielo azul, pasto verde, flores rojas/amarillas/violeta, montañas, sol) para poder evaluar las operaciones de forma controlada y reproducible.
+La implementación se realizó completamente en Python utilizando OpenCV para las conversiones y operaciones sobre imágenes, scikit-image para funciones auxiliares, scikit-learn para el clustering K-means en la extracción de paletas, y Matplotlib para todas las visualizaciones. Se utilizó como imagen de entrada una fotografía real del skyline de Bogotá con los cerros orientales de fondo, que ofrece una rica variedad cromática: los verdes oscuros de la montaña, los grises de las nubes, los tonos cálidos terracota de los edificios, el azul acero del cielo nublado y los acentos de las construcciones urbanas.
 
 El resultado fue una comprensión mucho más clara de por qué ciertos espacios de color son más adecuados que otros para tareas específicas: HSV facilita enormemente la segmentación por color porque separa el matiz de la intensidad, LAB permite ajustar luminosidad sin alterar los colores percibidos, y YCrCb es útil para detección de piel y balance de blancos.
 
@@ -46,13 +46,13 @@ La implementación en Python cubre las siete actividades propuestas en el taller
 
 ![Canales RGB](./media/python_canales_rgb.png)
 
-*Descomposición de la imagen en sus canales rojo, verde y azul. Se observa que el cielo es brillante en el canal azul y oscuro en rojo, mientras que el pasto domina el canal verde.*
+*Descomposición de la imagen en sus canales rojo, verde y azul. Los edificios terracota brillan en el canal rojo, la vegetación de los cerros domina el canal verde, y el cielo nublado es más visible en el canal azul.*
 
 #### Canales HSV
 
 ![Canales HSV](./media/python_canales_hsv.png)
 
-*Espacio HSV. El canal Hue muestra el matiz como un valor numérico (0-179), Saturation indica la pureza del color, y Value la luminosidad. Notar cómo las nubes tienen saturación cercana a cero.*
+*Espacio HSV. El canal Hue codifica el matiz como un valor numérico (0-179), Saturation indica la pureza del color, y Value la luminosidad. Las nubes y el cielo nublado tienen saturación baja, mientras que los edificios y la vegetación presentan valores más altos.*
 
 #### Canales LAB
 
@@ -76,7 +76,7 @@ La implementación en Python cubre las siete actividades propuestas en el taller
 
 ![Segmentación](./media/python_segmentacion_color.png)
 
-*Segmentación en HSV de cuatro familias de color. La fila superior muestra las máscaras binarias y la inferior el color extraído. El rojo segmenta correctamente las flores, el amarillo captura el sol y las flores amarillas, el verde aísla pasto y montañas, y el azul/violeta extrae el cielo y las flores violetas.*
+*Segmentación en HSV de cuatro familias de color. El rojo captura las fachadas terracota de los edificios, el amarillo identifica acentos cálidos y algunos techos, el verde aísla la vegetación de los cerros, y el azul/violeta extrae el cielo nublado y las montañas con neblina.*
 
 ### Manipulación de color
 
@@ -114,7 +114,7 @@ La implementación en Python cubre las siete actividades propuestas en el taller
 
 ![Histogramas](./media/python_histogramas.png)
 
-*Histograma RGB: el canal verde domina por la gran presencia de pasto. Histograma HSV: el pico en H confirma que el verde es el matiz predominante.*
+*Histograma RGB: la distribución muestra concentración en medios tonos por el cielo nublado y los edificios. Histograma HSV: la dispersión del Hue refleja la variedad cromática entre los verdes de la montaña, los marrones de los edificios y los grises del cielo.*
 
 #### Ecualización
 
@@ -251,9 +251,9 @@ Sería interesante implementar color transfer entre imágenes usando las estadí
 semana_4_4_conversion_espacios_color/
 ├── python/
 │   ├── main.py                 # Módulo principal con todas las implementaciones
-│   ├── generate_test_image.py  # Generador de imagen de prueba sintética
+│   ├── generate_test_image.py  # Generador de imagen de prueba (alternativa)
 │   ├── requirements.txt        # Dependencias de Python
-│   └── test_image.png          # Imagen de prueba generada
+│   └── test_image.png          # Fotografía de Bogotá utilizada como entrada
 ├── media/                      # Imágenes de resultados
 └── README.md                   # Este archivo
 ```
