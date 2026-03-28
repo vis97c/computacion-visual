@@ -1,6 +1,6 @@
 # Taller Luces y Sombras: Simulación de Radiometría en Unity y Three.js
 
-RESPONSABLES AQUI
+Victor Saa
 
 Fecha de entrega: 28/03/2026
 

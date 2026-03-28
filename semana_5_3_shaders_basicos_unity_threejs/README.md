@@ -1,6 +1,6 @@
 # Taller Sombras Personalizadas: Primeros Shaders en Unity y Three.js
 
-RESPONSABLES AQUI
+Victor Saa
 
 Fecha de entrega: 28/03/2026
 
@@ -16,7 +16,19 @@ DESCRIPCION DE LA IMPLEMENTACION EN UNITY
 
 ### Three.js
 
-DESCRIPCION DE LA IMPLEMENTACION EN THREE.JS
+Se utilizó three.js para la implementación. Se generó una escena con un objeto animado (un toroide). Se implementó un shader personalizado para el objeto. Se utilizó leva para alternar entre el shader personalizado y un meshStandardMaterial.
+
+```bash
+cd threejs
+
+# Con yarn
+yarn install
+yarn dev
+
+# Con npm
+npm install
+npm run dev
+```
 
 ## IA
 
@@ -24,9 +36,13 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
+![Three.js](media/threejs-4-1.gif)
+
+![Unity](media/unity-4-1.gif)
+
 ## Prompts utilizados
 
-PROMPTS UTILIZADOS AQUI
+Se utilizó antigravity para la implementación. Particularmente para ajustar los valores de las luces y sombras.
 
 ## Aprendizajes
 
@@ -34,16 +50,17 @@ APRENDIZAJES AQUI
 
 ## Contribuciones grupales (si aplica)
 
-NOMBRE: CONTRIBUCION
+- Victor Saa Three.js y Unity
 
 ## Estructura del proyecto
 
 ```
-semana_4_1_luces_sombras_radiometria/
+semana_5_3_shaders_basicos_unity_threejs/
 ├── unity/
 ├── threejs/
 ├── media/
-|    ├── ARCHIVO.gif
+|    ├── threejs-5-3.gif
+|    ├── unity-5-3.gif
 └── README.md
 ```
 
