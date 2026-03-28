@@ -273,12 +273,12 @@ semana_4_4_conversion_espacios_color/
 
 ## Checklist de entrega
 
-- [ ] Carpeta con nombre `semana_4_4_conversion_espacios_color`
-- [ ] Código limpio y funcional en carpetas por entorno
-- [ ] GIFs/imágenes incluidos con nombres descriptivos en carpeta `media/`
-- [ ] README completo con todas las secciones requeridas
-- [ ] Mínimo 2 capturas/GIFs por implementación
-- [ ] Commits descriptivos en inglés
-- [ ] Repositorio organizado y público
+- [X] Carpeta con nombre `semana_4_4_conversion_espacios_color`
+- [X] Código limpio y funcional en carpetas por entorno
+- [X] GIFs/imágenes incluidos con nombres descriptivos en carpeta `media/`
+- [X] README completo con todas las secciones requeridas
+- [X] Mínimo 2 capturas/GIFs por implementación
+- [X] Commits descriptivos en inglés
+- [X] Repositorio organizado y público
 
 ---
