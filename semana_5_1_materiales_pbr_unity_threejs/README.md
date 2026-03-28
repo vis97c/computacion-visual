@@ -1,6 +1,6 @@
 # Taller Materiales Realistas: Introducción a PBR en Unity y Three.js
 
-RESPONSABLES AQUI
+Jose Arturo Herrera Rivera
 
 Fecha de entrega: 28/03/2026
 
@@ -12,49 +12,36 @@ Comprender los principios del renderizado basado en física (PBR, Physically-Bas
 
 ### Unity
 
-DESCRIPCION DE LA IMPLEMENTACION EN UNITY
+Se implementaron 3 materiales PBR para comparar visualmente las diferencias entre materiales tradicionales y materiales PBR.
 
-### Three.js
+Se desarrolló una escena 3D que incluyó:
 
-DESCRIPCION DE LA IMPLEMENTACION EN THREE.JS
+Fila superior con objetos con materiales básicos (solo color base/albedo)
 
-## IA
+Fila inferior con objetos con materiales PBR completos
 
-IDE, prompts y autocompletado: Antigravity
+Esta disposición permitió observar inmediatamente las diferencias entre los materiales.
 
-## Resultados visuales
+Se crearon dos tipos de materiales para comparación:
 
-## Prompts utilizados
+1. Material PBR: Utiliza el shader Standard de Unity con todos los mapas de textura configurados
+2. Material Simple: Solo color base sin mapas, para demostrar las limitaciones del renderizado tradicional
 
-PROMPTS UTILIZADOS AQUI
+Tambien se implementaron 2 sliders que permiten modificar en tiempo real la textura de la esfera con material PBR:
+
+1. Valor de Metallic
+2. Valor de Smoothness
+
+## Resultados
+
+Las imagenes de las texturas PBR y No PBR se adjuntaron en la carpeta /media, tambien se adjuntó un video de la implementación.
+
+La implementación de PBR marcó una diferencia sustancial en la fidelidad visual de los materiales frente a los métodos de sombreado convencionales. En superficies como la textura de ladrillos, el uso de normal mapping y parámetros de rugosidad eliminó la apariencia plana, otorgando una profundidad real en las juntas y reflejos especulares más naturales. Este incremento en la tridimensionalidad se extendió al patrón de rayas, donde la respuesta lumínica permitió transiciones de brillo dinámicas.
+
+Finalmente, en las texturas orgánicas de musgo y roca, el modelo PBR sobresalió al capturar la complejidad de las irregularidades de la superficie; la simulación de humedad mediante reflejos realistas y la riqueza en las variaciones de color generaron un contraste y una respuesta a la iluminación que resultaron notablemente superiores a la iluminación básica.
 
 ## Aprendizajes
 
-APRENDIZAJES AQUI
+El aprendizaje más significativo fue comprender que el realismo en PBR no depende únicamente de la calidad de las texturas, sino de su configuración técnica correcta dentro del motor, destacando la importancia crítica de la gestión del espacio de color (sRGB) y la tipificación de los mapas en el motor.
 
-## Contribuciones grupales (si aplica)
-
-NOMBRE: CONTRIBUCION
-
-## Estructura del proyecto
-
-```
-semana_4_1_luces_sombras_radiometria/
-├── unity/
-├── threejs/
-├── media/
-|    ├── ARCHIVO.gif
-└── README.md
-```
-
----
-
-## Referencias
-
-Lista las fuentes, tutoriales, documentación o papers consultados durante el desarrollo:
-
-- Documentación oficial de Unity: https://docs.unity3d.com/Manual/
-- Tutorial de React Three Fiber: https://docs.pmnd.rs/react-three-fiber/
-- Leva (React UI controls): https://leva.pmnd.rs/
-
----
+La implementación demostró que el renderizado PBR es una aplicación de principios ópticos reales, donde herramientas nativas como el Default shader de Unity, combinadas con una interfaz interactiva para ajustar parámetros en tiempo real, permiten lograr resultados realistas sin necesidad de shaders complejos. Finalmente, la comparación directa entre materiales simples y PBR validó que la diferencia radica en la coherencia física de la luz y el relieve.
