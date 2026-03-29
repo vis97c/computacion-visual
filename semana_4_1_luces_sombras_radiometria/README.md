@@ -12,7 +12,7 @@ Explorar la interacción entre luz y objetos usando motores gráficos en 3D, sim
 
 ### Unity
 
-DESCRIPCION DE LA IMPLEMENTACION EN UNITY
+No se realizo
 
 ### Three.js
 
@@ -38,8 +38,6 @@ IDE, prompts y autocompletado: Antigravity
 
 ![Three.js](media/threejs-4-1.gif)
 
-![Unity](media/unity-4-1.gif)
-
 ## Prompts utilizados
 
 Se utilizó antigravity para la implementación. Particularmente para ajustar los valores de las luces y sombras.
@@ -50,17 +48,15 @@ APRENDIZAJES AQUI
 
 ## Contribuciones grupales (si aplica)
 
-- Victor Saa Three.js y Unity
+- Victor Saa Three.js
 
 ## Estructura del proyecto
 
 ```
 semana_4_1_luces_sombras_radiometria/
-├── unity/
 ├── threejs/
 ├── media/
 |    ├── threejs-4-1.gif
-|    ├── unity-4-1.gif
 └── README.md
 ```
 

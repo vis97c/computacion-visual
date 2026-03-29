@@ -12,7 +12,7 @@ Introducir la creación de shaders personalizados para modificar visualmente mat
 
 ### Unity
 
-DESCRIPCION DE LA IMPLEMENTACION EN UNITY
+No se realizo
 
 ### Three.js
 
@@ -38,8 +38,6 @@ IDE, prompts y autocompletado: Antigravity
 
 ![Three.js](media/threejs-4-1.gif)
 
-![Unity](media/unity-4-1.gif)
-
 ## Prompts utilizados
 
 Se utilizó antigravity para la implementación. Particularmente para ajustar los valores de las luces y sombras.
@@ -50,17 +48,15 @@ APRENDIZAJES AQUI
 
 ## Contribuciones grupales (si aplica)
 
-- Victor Saa Three.js y Unity
+- Victor Saa Three.js
 
 ## Estructura del proyecto
 
 ```
 semana_5_3_shaders_basicos_unity_threejs/
-├── unity/
 ├── threejs/
 ├── media/
 |    ├── threejs-5-3.gif
-|    ├── unity-5-3.gif
 └── README.md
 ```
 
