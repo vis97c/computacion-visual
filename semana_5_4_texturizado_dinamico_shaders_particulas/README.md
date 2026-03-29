@@ -2,6 +2,8 @@
 
 Juan Jose Alvarez
 
+Jose Arturo Herrera Rivera
+
 Fecha de entrega: 28/03/2026
 
 ## Descripción
