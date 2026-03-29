@@ -1,6 +1,6 @@
 # Taller Modelado Procedural Básico: Geometría desde Código
 
-**Estudiantes:** Manuel Santiago Mori Ardila
+**Estudiantes:** Manuel Santiago Mori Ardila, Jose Arturo Herrera Rivera
 
 **Fecha de entrega:** 28/03/2026
 
