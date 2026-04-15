@@ -1,8 +1,8 @@
 # Taller Interpolación de Movimiento: Suavizando Animaciones en Tiempo Real
 
-RESPONSABLES AQUI
+Victor Saa
 
-Fecha de entrega: 28/03/2026
+Fecha de entrega: 15/04/2026
 
 ## Descripción
 
@@ -10,13 +10,9 @@ Implementar técnicas de interpolación (LERP, SLERP, Bézier) para crear animac
 
 ## Implementaciónes
 
-### Unity
-
-DESCRIPCION DE LA IMPLEMENTACION EN UNITY
-
 ### Three.js
 
-DESCRIPCION DE LA IMPLEMENTACION EN THREE.JS
+Se generó una escena 3D con dos objetos que se mueven desde un punto inicial a uno final. Se utilizan dos tipos de interpolación: lineal y Bezier.
 
 ## IA
 
@@ -24,26 +20,25 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
+![Recorrido base](media/threejs-week-6-6a.gif)
+![Ajuste de parametros](media/threejs-week-6-6b.gif)
+
 ## Prompts utilizados
 
-PROMPTS UTILIZADOS AQUI
+Se le pidio a antigravity poder usar distintos tipos de curvas bezier para el movimiento de los objetos.
 
 ## Aprendizajes
 
-APRENDIZAJES AQUI
-
-## Contribuciones grupales (si aplica)
-
-NOMBRE: CONTRIBUCION
+Acá aprendí sobre las curvas de Bezier y como se pueden usar para crear movimientos suaves y naturales en objetos 3D.
 
 ## Estructura del proyecto
 
 ```
 semana_6_6_interpolacion_movimiento_animaciones/
-├── unity/
 ├── threejs/
 ├── media/
-|    ├── ARCHIVO.gif
+|    ├── threejs-week-6-6a.gif
+|    ├── threejs-week-6-6b.gif
 └── README.md
 ```
 
