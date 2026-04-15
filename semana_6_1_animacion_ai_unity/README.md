@@ -1,8 +1,8 @@
 # Taller Animación IA Unity
 
-## Nombre del estudiante
+## Nombres de los estudiantes
 
-Juan
+Victor Saa, Juan Jose Alvarez, Juan Pablo Correa, Jose Arturo Herrera Rivera, Manuel Santiago Mori Ardila
 
 ## Fecha de entrega
 
@@ -45,28 +45,39 @@ La totalidad del taller fue implementada en Unity 6 con URP. La escena contiene 
 
 ### Estado Idle
 
-![Estado Idle](./media/state_idle.png)
+![Estado Idle](./media/state_idle.gif)
 
-NPC rojo quieto en su posición inicial. El agente tiene `isStopped = true`. Tras 2 s transiciona automáticamente a Patrol.
+NPC rojo quieto en su posición inicial. El agente tiene `isStopped = true` y la velocidad es cero. Tras 2 s el timer inicia la transición automática a Patrol.
 
+### Estado Patrol
+
+![Estado Patrol](./media/state_patrol.gif)
+
+NPC navegando entre los 4 waypoints a 3.5 u/s bordeando obstáculos. La animación Walk se activa cuando `Speed > 0.1`. El Player verde permanece fuera del radio de detección.
 
 ### Estado Chase
 
-![Estado Chase](./media/state_chase.png)
+![Estado Chase](./media/state_chase.gif)
 
-Player verde dentro del radio de detección (<10 m). El NPC incrementa velocidad a 5 u/s y persigue activamente. Al alejarse más de 15 m retorna a Patrol.
+Player verde entra al radio de detección (<10 m) y el NPC acelera a 5 u/s persiguiéndolo activamente. Al alejarse más de 15 m el NPC retorna a Patrol.
 
-### Scene View — NavMesh bakeado
+### Retorno automático del jugador
+
+![Retorno automático](./media/player_return.gif)
+
+El jugador sale del plano navegable, se activa el modo de retorno automático y camina hacia el centro sin input del jugador. Al llegar a menos de 4 u del origen, el control WASD se restaura.
+
+### Scene View — NavMesh y gizmos
 
 ![Gizmos escena](./media/scene_gizmos.png)
 
-Vista del Scene View con el área NavMesh bakeada (azul), los 4 obstáculos Navigation Static y el NPC en el centro.
+Vista del Scene View con el área NavMesh bakeada (azul), los 4 obstáculos Navigation Static, y los gizmos del NPC seleccionado mostrando los radios de detección y pérdida.
 
 ---
 
 ## Código relevante
 
-### FSM — núcleo del ciclo de estados (`AIController.cs`)
+### FSM — ciclo de estados (`AIController.cs`)
 
 ```csharp
 void Update()
@@ -85,7 +96,18 @@ void Update()
 }
 ```
 
-### Patrullaje con timer en waypoint
+### Estado Idle
+
+```csharp
+void RunIdle()
+{
+    _agent.isStopped = true;
+    _timer += Time.deltaTime;
+    if (_timer >= idleDuration) SetPatrol();
+}
+```
+
+### Estado Patrol — navegación entre waypoints
 
 ```csharp
 void RunPatrol()
@@ -105,6 +127,77 @@ void RunPatrol()
 }
 ```
 
+### Estado Chase — persecución activa
+
+```csharp
+void RunChase()
+{
+    _agent.isStopped = false;
+    if (player) _agent.SetDestination(player.position);
+    if (!InRange(loseRadius)) SetPatrol();
+}
+```
+
+### Transiciones — cambio de velocidad y destino
+
+```csharp
+void SetIdle()
+{
+    currentState = AIState.Idle;
+    _timer = 0f;
+    _agent.isStopped = true;
+}
+
+void SetPatrol()
+{
+    currentState = AIState.Patrol;
+    _timer = 0f;
+    _agent.speed = 3.5f;
+    if (waypoints != null && waypoints.Length > 0)
+        _agent.SetDestination(waypoints[_wpIdx].position);
+}
+
+void SetChase()
+{
+    currentState = AIState.Chase;
+    _timer = 0f;
+    _agent.speed = 5f;
+}
+```
+
+### Detección por distancia
+
+```csharp
+bool InRange(float r)
+    => player && Vector3.Distance(transform.position, player.position) < r;
+```
+
+### Gizmos de debug en Scene View
+
+```csharp
+void OnDrawGizmosSelected()
+{
+    // Radio de detección (amarillo)
+    Gizmos.color = new Color(1f, 1f, 0f, 0.25f);
+    Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+    // Radio de pérdida (rojo)
+    Gizmos.color = new Color(1f, 0f, 0f, 0.15f);
+    Gizmos.DrawWireSphere(transform.position, loseRadius);
+
+    // Ruta de waypoints (cyan)
+    if (waypoints == null) return;
+    Gizmos.color = Color.cyan;
+    for (int i = 0; i < waypoints.Length; i++)
+    {
+        if (!waypoints[i]) continue;
+        Gizmos.DrawSphere(waypoints[i].position, 0.35f);
+        Gizmos.DrawLine(waypoints[i].position,
+            waypoints[(i + 1) % waypoints.Length].position);
+    }
+}
+```
+
 ### Retorno automático del jugador (`PlayerMovement.cs`)
 
 ```csharp
@@ -112,18 +205,21 @@ void FixedUpdate()
 {
     Vector3 pos = _rb.position;
 
+    // Detectar salida del área navegable
     bool outOfBounds = Mathf.Abs(pos.x) > boundaryLimit ||
                        Mathf.Abs(pos.z) > boundaryLimit;
 
     if (outOfBounds && !_returning)
     {
         _returning = true;
+        // Clampear al borde para evitar que el NPC pierda el objetivo
         _rb.MovePosition(new Vector3(
             Mathf.Clamp(pos.x, -boundaryLimit, boundaryLimit),
             pos.y,
             Mathf.Clamp(pos.z, -boundaryLimit, boundaryLimit)));
     }
 
+    // Modo retorno: ignorar input y caminar hacia el centro
     if (_returning)
     {
         Vector3 toCenter = Vector3.zero - _rb.position;
@@ -139,7 +235,7 @@ void FixedUpdate()
         return;
     }
 
-    // WASD normal
+    // Movimiento WASD normal (New Input System)
     var kb = Keyboard.current;
     if (kb == null) return;
     float h = 0f, v = 0f;
@@ -153,13 +249,6 @@ void FixedUpdate()
             Quaternion.LookRotation(moveDir), rotationSpeed * Time.fixedDeltaTime);
     _rb.MovePosition(_rb.position + moveDir * speed * Time.fixedDeltaTime);
 }
-```
-
-### Detección por distancia
-
-```csharp
-bool InRange(float r)
-    => player && Vector3.Distance(transform.position, player.position) < r;
 ```
 
 ---
@@ -187,11 +276,11 @@ Condiciones de transición:
   IDLE   → PATROL : idleTimer >= idleDuration (2 s)
   PATROL → CHASE  : distancia(NPC, Player) < detectionRadius (10 m)
   CHASE  → PATROL : distancia(NPC, Player) > loseRadius (15 m)
-  PATROL → IDLE   : remainingDistance < 0.5 f en waypoint, espera 2 s
+  PATROL → IDLE   : remainingDistance < 0.5f en waypoint, espera 2 s
 
 Comportamiento del jugador:
-  Dentro del plano  →  control WASD libre
-  Fuera de ±23 u    →  auto-retorno hacia (0,0,0) a 4 u/s
+  Dentro del plano   →  control WASD libre
+  Fuera de ±23 u     →  auto-retorno hacia (0,0,0) a 4 u/s
   A < 4 u del centro →  control WASD restaurado
 ```
 
@@ -202,13 +291,18 @@ Comportamiento del jugador:
 ```
 "Crea un AIController en C# para Unity con FSM de 3 estados (Idle, Patrol, Chase)
 usando NavMeshAgent. El NPC patrulla entre waypoints, detecta al jugador por
-distancia y lo persigue. Incluye transiciones limpias y sincronización con Animator."
+distancia y lo persigue. Incluye transiciones con cambio de velocidad y
+sincronización con Animator a través de parámetros Speed y State."
 
 "Escribe PlayerMovement.cs compatible con New Input System de Unity usando
 Keyboard.current para movimiento WASD con Rigidbody.MovePosition. Agrega lógica
 de retorno automático cuando el jugador sale del área navegable: detectar salida
 por bounds ±23u, clampear al borde y mover hacia Vector3.zero hasta estar a
 menos de 4u, luego restaurar control."
+
+"Añade OnDrawGizmosSelected al AIController para visualizar en Scene View los
+radios de detección y pérdida como esferas semitransparentes, y la ruta de
+waypoints como líneas cyan con esferas en cada punto."
 ```
 
 ---
@@ -217,15 +311,15 @@ menos de 4u, luego restaurar control."
 
 ### Aprendizajes
 
-El taller consolidó el uso práctico del pipeline completo de NavMesh: marcar objetos como Navigation Static, hacer el Bake y entender cómo el agente resuelve rutas en tiempo real alrededor de obstáculos. La separación entre lógica de estado (FSM), navegación (NavMeshAgent) y presentación (Animator) quedó muy clara como patrón arquitectónico reutilizable.
+El taller consolidó el uso práctico del pipeline completo de NavMesh: marcar objetos como Navigation Static, hacer el Bake y entender cómo el agente resuelve rutas en tiempo real alrededor de obstáculos. La separación entre lógica de estado (FSM), navegación (NavMeshAgent) y presentación (Animator) quedó muy clara como patrón arquitectónico reutilizable en cualquier juego.
 
-El sistema de retorno automático del jugador enseñó un patrón útil de "modo prioritario": una bandera `_returning` que suspende el input normal y toma control del movimiento del Rigidbody hasta que se cumple una condición de salida, luego devuelve el control sin necesidad de coroutines ni maquinaria adicional.
+El sistema de retorno automático del jugador enseñó un patrón de "modo prioritario": una bandera `_returning` que suspende el input normal y toma control del movimiento del Rigidbody hasta que se cumple una condición de salida, devolviendo el control sin necesidad de coroutines ni maquinaria adicional.
 
 ### Dificultades
 
 La incompatibilidad del Input System fue el primer obstáculo: el proyecto usaba el New Input System pero el script inicial usaba `UnityEngine.Input` (legacy), generando errores en cada frame. La solución fue migrar `PlayerMovement` a `UnityEngine.InputSystem.Keyboard.current`.
 
-El timer de Idle también requirió atención: si no se resetea en cada transición, el NPC puede acumular tiempo de estados anteriores y cambiar de estado prematuramente. Se resolvió llamando `_timer = 0f` en cada método de transición.
+El timer de Idle también requirió atención: si no se resetea en cada transición, el NPC puede acumular tiempo de estados anteriores y cambiar prematuramente. Se resolvió llamando `_timer = 0f` en cada método de transición `Set*()`.
 
 ### Mejoras futuras
 
@@ -261,9 +355,10 @@ semana_6_1_animacion_ai_unity/
 │       └── Scenes/
 │           └── SampleScene.unity
 ├── media/
-│   ├── state_idle.png
-│   ├── state_patrol.png
-│   ├── state_chase.png
+│   ├── state_idle.gif
+│   ├── state_patrol.gif
+│   ├── state_chase.gif
+│   ├── player_return.gif
 │   └── scene_gizmos.png
 └── README.md
 ```
@@ -285,10 +380,10 @@ semana_6_1_animacion_ai_unity/
 
 - [x] Carpeta con nombre `semana_6_1_animacion_ai_unity`
 - [x] Scripts limpios y comentados en `unity/Assets/Scripts/`
-- [x] Imágenes en `media/` con nombres descriptivos
+- [x] GIFs e imágenes en `media/` con nombres descriptivos
 - [x] README completo con todas las secciones requeridas
-- [x] Mínimo 2 capturas por implementación (4 imágenes incluidas)
+- [x] Mínimo 2 capturas/GIFs por implementación
 - [x] Diagrama FSM documentado
 - [x] Retorno automático del jugador al salir del área navegable
-- [x] Commits descriptivos en inglés
-- [x] Repositorio organizado y público
+- [ ] Commits descriptivos en inglés
+- [ ] Repositorio organizado y público
