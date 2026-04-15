@@ -1,45 +1,270 @@
-# Taller Animación con IA en Unity para Personajes Autónomos
+# Taller Animación IA Unity
 
-RESPONSABLES AQUI
+## Nombre del estudiante
 
-Fecha de entrega: 28/03/2026
+Juan
 
-## Descripción
+## Fecha de entrega
 
-Desarrollar comportamientos autónomos para NPCs en Unity utilizando NavMesh y máquinas de estados finitos con control de animaciones dinámicas.
+`2025-04-15`
 
-## Implementaciónes
+---
+
+## Descripción breve
+
+Este taller explora la creación de NPCs con comportamiento autónomo en Unity, combinando el sistema de navegación **NavMesh** con una **Máquina de Estados Finitos (FSM)** y animaciones sincronizadas dinámicamente con el movimiento del agente.
+
+Se construyó una escena completa con terreno navegable (50×50 u), cuatro obstáculos estáticos, cuatro waypoints de patrullaje y dos personajes: un NPC controlado por IA y un jugador controlable con teclado. El NPC implementa tres estados (Idle, Patrol, Chase) con transiciones basadas en distancia al jugador y tiempo en estado. Cada estado activa una animación diferente (Idle, Walk, Run) a través de parámetros del Animator Controller.
+
+El jugador incorpora un sistema de **retorno automático**: si sale del área navegable, el control se desactiva temporalmente y el personaje camina solo hacia el centro de la escena, garantizando que la persecución siempre pueda reanudarse.
+
+---
+
+## Implementaciones
 
 ### Unity
 
-DESCRIPCION DE LA IMPLEMENTACION EN UNITY
+La totalidad del taller fue implementada en Unity 6 con URP. La escena contiene un plano de 50×50 unidades como área navegable bakeada con NavMesh, cuatro obstáculos cúbicos estáticos (Navigation Static) distribuidos para forzar rodeos de ruta, y cuatro waypoints vacíos en las esquinas del mapa.
 
-## IA
+**NPC (cápsula roja):** lleva los componentes `NavMeshAgent`, `Animator` y `AIController`. La FSM arranca en Idle durante 2 s, luego pasa a Patrol navegando entre los 4 waypoints a 3.5 u/s. Al detectar al jugador dentro de 10 m cambia a Chase a 5 u/s. Si el jugador supera los 15 m de distancia, vuelve a Patrol.
 
-IDE, prompts y autocompletado: Antigravity
+**Player (cápsula verde):** lleva `Rigidbody` (rotación congelada) y `PlayerMovement`, escrito con `UnityEngine.InputSystem.Keyboard.current` para compatibilidad con el New Input System del proyecto. Incorpora lógica de **retorno automático**: cuando el jugador sale del límite navegable (±23 u en X o Z), se desactiva el input y el personaje camina automáticamente a 4 u/s hacia el centro `(0,0,0)`. Al llegar a menos de 4 u del origen, el control vuelve al jugador y la persecución se reanuda.
+
+**Animator Controller (`NPC_Animator`):** parámetros `Speed (Float)` y `State (Int)` actualizados cada frame desde `AIController`.
+
+| Transición | Condición |
+|---|---|
+| Idle → Walk | Speed > 0.1 |
+| Walk → Idle | Speed < 0.1 |
+| Walk → Run  | Speed > 3.5 |
+| Run → Walk  | Speed < 3.5 |
+
+---
 
 ## Resultados visuales
 
+### Estado Idle
+
+![Estado Idle](./media/state_idle.png)
+
+NPC rojo quieto en su posición inicial. El agente tiene `isStopped = true`. Tras 2 s transiciona automáticamente a Patrol.
+
+
+### Estado Chase
+
+![Estado Chase](./media/state_chase.png)
+
+Player verde dentro del radio de detección (<10 m). El NPC incrementa velocidad a 5 u/s y persigue activamente. Al alejarse más de 15 m retorna a Patrol.
+
+### Scene View — NavMesh bakeado
+
+![Gizmos escena](./media/scene_gizmos.png)
+
+Vista del Scene View con el área NavMesh bakeada (azul), los 4 obstáculos Navigation Static y el NPC en el centro.
+
+---
+
+## Código relevante
+
+### FSM — núcleo del ciclo de estados (`AIController.cs`)
+
+```csharp
+void Update()
+{
+    switch (currentState)
+    {
+        case AIState.Idle:   RunIdle();   break;
+        case AIState.Patrol: RunPatrol(); break;
+        case AIState.Chase:  RunChase();  break;
+    }
+    if (_anim)
+    {
+        _anim.SetFloat("Speed", _agent.velocity.magnitude);
+        _anim.SetInteger("State", (int)currentState);
+    }
+}
+```
+
+### Patrullaje con timer en waypoint
+
+```csharp
+void RunPatrol()
+{
+    _agent.isStopped = false;
+    if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+    {
+        _timer += Time.deltaTime;
+        if (_timer >= idleDuration)
+        {
+            _timer = 0f;
+            _wpIdx = (_wpIdx + 1) % waypoints.Length;
+            _agent.SetDestination(waypoints[_wpIdx].position);
+        }
+    }
+    if (InRange(detectionRadius)) SetChase();
+}
+```
+
+### Retorno automático del jugador (`PlayerMovement.cs`)
+
+```csharp
+void FixedUpdate()
+{
+    Vector3 pos = _rb.position;
+
+    bool outOfBounds = Mathf.Abs(pos.x) > boundaryLimit ||
+                       Mathf.Abs(pos.z) > boundaryLimit;
+
+    if (outOfBounds && !_returning)
+    {
+        _returning = true;
+        _rb.MovePosition(new Vector3(
+            Mathf.Clamp(pos.x, -boundaryLimit, boundaryLimit),
+            pos.y,
+            Mathf.Clamp(pos.z, -boundaryLimit, boundaryLimit)));
+    }
+
+    if (_returning)
+    {
+        Vector3 toCenter = Vector3.zero - _rb.position;
+        toCenter.y = 0f;
+        if (toCenter.magnitude < returnThreshold) { _returning = false; return; }
+
+        Vector3 dir = toCenter.normalized;
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            Quaternion.LookRotation(dir),
+            rotationSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(_rb.position + dir * returnSpeed * Time.fixedDeltaTime);
+        return;
+    }
+
+    // WASD normal
+    var kb = Keyboard.current;
+    if (kb == null) return;
+    float h = 0f, v = 0f;
+    if (kb.aKey.isPressed || kb.leftArrowKey.isPressed)  h = -1f;
+    if (kb.dKey.isPressed || kb.rightArrowKey.isPressed) h =  1f;
+    if (kb.sKey.isPressed || kb.downArrowKey.isPressed)  v = -1f;
+    if (kb.wKey.isPressed || kb.upArrowKey.isPressed)    v =  1f;
+    Vector3 moveDir = new Vector3(h, 0f, v).normalized;
+    if (moveDir.magnitude > 0.1f)
+        transform.rotation = Quaternion.RotateTowards(transform.rotation,
+            Quaternion.LookRotation(moveDir), rotationSpeed * Time.fixedDeltaTime);
+    _rb.MovePosition(_rb.position + moveDir * speed * Time.fixedDeltaTime);
+}
+```
+
+### Detección por distancia
+
+```csharp
+bool InRange(float r)
+    => player && Vector3.Distance(transform.position, player.position) < r;
+```
+
+---
+
+## Diagrama FSM implementado
+
+```
+                ┌─────────────────────────────────────┐
+                │                                     │
+   ┌────────────▼─────────┐                           │
+   │         IDLE         │                           │
+   │  isStopped = true    │                           │
+   │  vel = 0             │                           │
+   └──────────┬───────────┘                           │
+              │ idleTimer >= 2s                       │
+              ▼                                       │ dist > 15m
+   ┌──────────────────────┐       dist < 10m          │
+   │        PATROL        │──────────────────►┌───────┴──────────┐
+   │  speed = 3.5 u/s     │                   │      CHASE       │
+   │  navega por waypoints│◄──────────────────│  speed = 5.0 u/s │
+   └──────────────────────┘                   │  sigue al Player │
+                                              └──────────────────┘
+
+Condiciones de transición:
+  IDLE   → PATROL : idleTimer >= idleDuration (2 s)
+  PATROL → CHASE  : distancia(NPC, Player) < detectionRadius (10 m)
+  CHASE  → PATROL : distancia(NPC, Player) > loseRadius (15 m)
+  PATROL → IDLE   : remainingDistance < 0.5 f en waypoint, espera 2 s
+
+Comportamiento del jugador:
+  Dentro del plano  →  control WASD libre
+  Fuera de ±23 u    →  auto-retorno hacia (0,0,0) a 4 u/s
+  A < 4 u del centro →  control WASD restaurado
+```
+
+---
+
 ## Prompts utilizados
 
-PROMPTS UTILIZADOS AQUI
+```
+"Crea un AIController en C# para Unity con FSM de 3 estados (Idle, Patrol, Chase)
+usando NavMeshAgent. El NPC patrulla entre waypoints, detecta al jugador por
+distancia y lo persigue. Incluye transiciones limpias y sincronización con Animator."
 
-## Aprendizajes
+"Escribe PlayerMovement.cs compatible con New Input System de Unity usando
+Keyboard.current para movimiento WASD con Rigidbody.MovePosition. Agrega lógica
+de retorno automático cuando el jugador sale del área navegable: detectar salida
+por bounds ±23u, clampear al borde y mover hacia Vector3.zero hasta estar a
+menos de 4u, luego restaurar control."
+```
 
-APRENDIZAJES AQUI
+---
 
-## Contribuciones grupales (si aplica)
+## Aprendizajes y dificultades
 
-NOMBRE: CONTRIBUCION
+### Aprendizajes
+
+El taller consolidó el uso práctico del pipeline completo de NavMesh: marcar objetos como Navigation Static, hacer el Bake y entender cómo el agente resuelve rutas en tiempo real alrededor de obstáculos. La separación entre lógica de estado (FSM), navegación (NavMeshAgent) y presentación (Animator) quedó muy clara como patrón arquitectónico reutilizable.
+
+El sistema de retorno automático del jugador enseñó un patrón útil de "modo prioritario": una bandera `_returning` que suspende el input normal y toma control del movimiento del Rigidbody hasta que se cumple una condición de salida, luego devuelve el control sin necesidad de coroutines ni maquinaria adicional.
+
+### Dificultades
+
+La incompatibilidad del Input System fue el primer obstáculo: el proyecto usaba el New Input System pero el script inicial usaba `UnityEngine.Input` (legacy), generando errores en cada frame. La solución fue migrar `PlayerMovement` a `UnityEngine.InputSystem.Keyboard.current`.
+
+El timer de Idle también requirió atención: si no se resetea en cada transición, el NPC puede acumular tiempo de estados anteriores y cambiar de estado prematuramente. Se resolvió llamando `_timer = 0f` en cada método de transición.
+
+### Mejoras futuras
+
+- Agregar estado **Search**: al perder al jugador, el NPC va a la última posición conocida antes de volver a Patrol.
+- Reemplazar detección por distancia pura con **Line of Sight** usando `Physics.Raycast` para que los obstáculos bloqueen la visión.
+- Usar **NavMeshObstacle** en objetos dinámicos para que el agente los esquive en tiempo real.
+- Añadir sonido de alerta al entrar en Chase y sonido de "pérdida" al regresar a Patrol.
+
+---
+
+## Contribuciones grupales
+
+Taller realizado de forma individual.
+
+---
 
 ## Estructura del proyecto
 
 ```
 semana_6_1_animacion_ai_unity/
 ├── unity/
-├── threejs/
+│   └── Assets/
+│       ├── Scripts/
+│       │   ├── AIController.cs
+│       │   └── PlayerMovement.cs
+│       ├── Animators/
+│       │   └── NPC_Animator.controller
+│       ├── Materials/
+│       │   ├── NPC_Red.mat
+│       │   ├── Player_Green.mat
+│       │   ├── Ground_Grey.mat
+│       │   └── Obstacle_Blue.mat
+│       └── Scenes/
+│           └── SampleScene.unity
 ├── media/
-|    ├── ARCHIVO.gif
+│   ├── state_idle.png
+│   ├── state_patrol.png
+│   ├── state_chase.png
+│   └── scene_gizmos.png
 └── README.md
 ```
 
@@ -47,10 +272,23 @@ semana_6_1_animacion_ai_unity/
 
 ## Referencias
 
-Lista las fuentes, tutoriales, documentación o papers consultados durante el desarrollo:
-
-- Documentación oficial de Unity: https://docs.unity3d.com/Manual/
-- Tutorial de React Three Fiber: https://docs.pmnd.rs/react-three-fiber/
-- Leva (React UI controls): https://leva.pmnd.rs/
+- Unity NavMesh Documentation: https://docs.unity3d.com/Manual/nav-BuildingNavMesh.html
+- Unity Animator Controller: https://docs.unity3d.com/Manual/Animator.html
+- Unity New Input System: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/manual/index.html
+- Finite State Machines in Unity: https://www.youtube.com/watch?v=G1bd75R10zQ
+- AI Navigation Tutorial — Unity Learn: https://learn.unity.com/tutorial/navigation-basics
+- Mixamo (modelos riggeados gratuitos): https://www.mixamo.com/
 
 ---
+
+## Checklist de entrega
+
+- [x] Carpeta con nombre `semana_6_1_animacion_ai_unity`
+- [x] Scripts limpios y comentados en `unity/Assets/Scripts/`
+- [x] Imágenes en `media/` con nombres descriptivos
+- [x] README completo con todas las secciones requeridas
+- [x] Mínimo 2 capturas por implementación (4 imágenes incluidas)
+- [x] Diagrama FSM documentado
+- [x] Retorno automático del jugador al salir del área navegable
+- [x] Commits descriptivos en inglés
+- [x] Repositorio organizado y público
