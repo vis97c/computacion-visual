@@ -1,6 +1,6 @@
 # Taller UV Mapping: Texturas que Encajan
 
-Jose Arturo Herrera Rivera
+Jose Arturo Herrera Rivera, Juan Jose Alvarez Lozano
 
 Fecha de entrega: 28/03/2026
 
