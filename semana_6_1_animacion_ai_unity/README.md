@@ -14,10 +14,6 @@ Desarrollar comportamientos autónomos para NPCs en Unity utilizando NavMesh y m
 
 DESCRIPCION DE LA IMPLEMENTACION EN UNITY
 
-### Three.js
-
-DESCRIPCION DE LA IMPLEMENTACION EN THREE.JS
-
 ## IA
 
 IDE, prompts y autocompletado: Antigravity

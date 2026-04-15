@@ -14,10 +14,6 @@ Aprender a usar Colliders para detectar colisiones entre objetos y disparar efec
 
 DESCRIPCION DE LA IMPLEMENTACION EN UNITY
 
-### Three.js
-
-DESCRIPCION DE LA IMPLEMENTACION EN THREE.JS
-
 ## IA
 
 IDE, prompts y autocompletado: Antigravity

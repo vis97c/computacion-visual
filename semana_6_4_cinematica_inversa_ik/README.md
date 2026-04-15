@@ -20,13 +20,15 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
+![Interaccion brazo robotico con objetivo](media/threejs-week-6-4.gif)
+
 ## Prompts utilizados
 
-PROMPTS UTILIZADOS AQUI
+Se le pidio a antigravity implementar el algoritmo de seguimiento de objetivo mediante cinemática inversa.
 
 ## Aprendizajes
 
-APRENDIZAJES AQUI
+Aca pude entender mejor como funciona la cinemática inversa y como se puede implementar en un entorno 3D.
 
 ## Estructura del proyecto
 
@@ -34,7 +36,7 @@ APRENDIZAJES AQUI
 semana_6_4_cinematica_inversa_ik/
 ├── threejs/
 ├── media/
-|    ├── ARCHIVO.gif
+|    ├── threejs-week-6-4.gif
 └── README.md
 ```
 
