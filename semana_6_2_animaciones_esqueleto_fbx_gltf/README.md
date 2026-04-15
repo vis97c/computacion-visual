@@ -1,4 +1,4 @@
-# Taller UV Mapping: Texturas que Encajan
+# Taller Animaciones por Esqueleto: Importando y Reproduciendo Animaciones
 
 RESPONSABLES AQUI
 
@@ -6,7 +6,7 @@ Fecha de entrega: 28/03/2026
 
 ## Descripción
 
-Explorar el mapeo UV como técnica fundamental para aplicar correctamente texturas 2D sobre modelos 3D sin distorsión. El objetivo es entender cómo se proyectan las texturas y cómo se pueden ajustar las coordenadas UV para mejorar el resultado visual.
+Trabajar con animaciones basadas en huesos (esqueleto) y reproducirlas desde archivos externos como .FBX o .GLTF. El objetivo es comprender cómo funcionan las animaciones esqueléticas, cómo importarlas correctamente y cómo integrarlas en escenas interactivas.
 
 ## Implementaciónes
 
@@ -39,7 +39,7 @@ NOMBRE: CONTRIBUCION
 ## Estructura del proyecto
 
 ```
-semana_4_1_luces_sombras_radiometria/
+semana_6_2_animaciones_esqueleto_fbx_gltf/
 ├── unity/
 ├── threejs/
 ├── media/

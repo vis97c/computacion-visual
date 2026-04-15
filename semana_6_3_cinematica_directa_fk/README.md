@@ -1,60 +1,49 @@
-# Taller UV Mapping: Texturas que Encajan
+# Taller Cinemática Directa: Brazo Robótico Interactivo
 
-RESPONSABLES AQUI
+Juan Jose Alvarez, Jose Arturo Herrera Rivera, Manuel Santiago Mori Ardila
 
-Fecha de entrega: 28/03/2026
+Fecha de entrega: 15/04/2026
 
 ## Descripción
 
-Explorar el mapeo UV como técnica fundamental para aplicar correctamente texturas 2D sobre modelos 3D sin distorsión. El objetivo es entender cómo se proyectan las texturas y cómo se pueden ajustar las coordenadas UV para mejorar el resultado visual.
+Explorar los conceptos básicos de la cinemática directa aplicados a un brazo robótico articulado en 3D. El objetivo es construir una demostración interactiva que permita ajustar y visualizar la rotación de diferentes articulaciones (como el hombro y el codo) tanto de forma manual como automática, observando cómo el movimiento de la base afecta a los componentes conectados.
 
-## Implementaciónes
+## Implementación
 
-### Unity
+Para el desarrollo de la práctica se utilizó **React Three Fiber** (R3F) junto con **Vite** para construir un entorno 3D en el navegador de manera eficiente.
 
-DESCRIPCION DE LA IMPLEMENTACION EN UNITY
+### Estructura y Jerarquía
 
-### Three.js
+Se definió una estructura jerárquica para el brazo robótico, compuesta por:
+- **Base (Hombro)**: El punto de anclaje inicial.
+- **Brazo**: El segmento conectado a la base.
+- **Antebrazo (Codo)**: Adosado al brazo, demostrando la propagación de las transformaciones geométricas.
 
-DESCRIPCION DE LA IMPLEMENTACION EN THREE.JS
+Se implementaron controles interactivos utilizando la librería **Leva**, lo que permite modificar los ángulos de rotación de cada articulación en tiempo real. 
 
-## IA
+### Interactividad y Animación
 
-IDE, prompts y autocompletado: Antigravity
+Se añadieron dos modos interactivos:
+1. **Modo Manual**: A través del panel de controles (Leva), el usuario puede ajustar individualmente las articulaciones y observar cómo dichas transformaciones afectan a los segmentos descendentes (hijos) del brazo robótico debido a la cinemática directa.
+2. **Modo Automático**: Se programó un ciclo de animación usando `useFrame` de R3F para rotar automáticamente las articulaciones en el tiempo, proporcionando una visualización continua del movimiento complejo.
+
+Además, se añadió un rastro o "trail" para el "End Effector" (extremo del brazo), que dibuja la trayectoria del brazo a medida que se mueve, permitiendo visualizar claramente el espacio de trabajo del robot.
 
 ## Resultados visuales
 
-## Prompts utilizados
+En esta sección se evidencia la correcta aplicación de las transformaciones y la jerarquía de los objetos, así como el funcionamiento de la cinemática directa en el lienzo 3D.
 
-PROMPTS UTILIZADOS AQUI
+![Rotación Automática y Manual](media/rotacion_automatica_y_manual.gif)
+*Figura 1. El GIF muestra la rotación del brazo tanto en modo automático como en modo manual modificando los parámetros para cada articulación.*
+
+Los controles interactivos nos permitieron aislar el movimiento de cada articulación y verificar visualmente que las rotaciones locales se transmiten correctamente a los descendientes de la jerarquía geométrica del objeto.
 
 ## Aprendizajes
 
-APRENDIZAJES AQUI
+A partir de esta práctica, se adquirieron conocimientos clave sobre la jerarquía clásica empleada en gráficos 3D y la cinemática directa.
 
-## Contribuciones grupales (si aplica)
+En primer lugar, se comprendió cómo la creación de jerarquías de padres e hijos permite que la traslación y rotación influyan de forma lógica y predecible en todos los elementos anidados, facilitando enormemente la representación visual de sistemas mecánicos en Three.js / React Three Fiber.
 
-NOMBRE: CONTRIBUCION
+Adicionalmente, se integraron controles dinámicos que permitieron una rápida experimentación interactiva, lo cual es fundamental para validar y ajustar los límites de movimiento en tiempo real.
 
-## Estructura del proyecto
-
-```
-semana_4_1_luces_sombras_radiometria/
-├── unity/
-├── threejs/
-├── media/
-|    ├── ARCHIVO.gif
-└── README.md
-```
-
----
-
-## Referencias
-
-Lista las fuentes, tutoriales, documentación o papers consultados durante el desarrollo:
-
-- Documentación oficial de Unity: https://docs.unity3d.com/Manual/
-- Tutorial de React Three Fiber: https://docs.pmnd.rs/react-three-fiber/
-- Leva (React UI controls): https://leva.pmnd.rs/
-
----
+Por último, se trabajó con la propagación continua de coordenadas y transformaciones de un marco de referencia local al de sus sucesores, reafirmando la importancia del manejo adecuado de transformaciones locales, globales y los puntos de pivote en el diseño de articulaciones mecánicas en simulaciones 3D.

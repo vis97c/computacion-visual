@@ -1,4 +1,4 @@
-# Taller UV Mapping: Texturas que Encajan
+# Taller Interpolación de Movimiento: Suavizando Animaciones en Tiempo Real
 
 RESPONSABLES AQUI
 
@@ -6,7 +6,7 @@ Fecha de entrega: 28/03/2026
 
 ## Descripción
 
-Explorar el mapeo UV como técnica fundamental para aplicar correctamente texturas 2D sobre modelos 3D sin distorsión. El objetivo es entender cómo se proyectan las texturas y cómo se pueden ajustar las coordenadas UV para mejorar el resultado visual.
+Implementar técnicas de interpolación (LERP, SLERP, Bézier) para crear animaciones suaves y naturales en objetos 3D. El objetivo es controlar el paso del tiempo y la transición entre estados con efectos realistas como aceleración, desaceleración o movimientos curvos.
 
 ## Implementaciónes
 
@@ -39,7 +39,7 @@ NOMBRE: CONTRIBUCION
 ## Estructura del proyecto
 
 ```
-semana_4_1_luces_sombras_radiometria/
+semana_6_6_interpolacion_movimiento_animaciones/
 ├── unity/
 ├── threejs/
 ├── media/

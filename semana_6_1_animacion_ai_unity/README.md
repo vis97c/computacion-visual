@@ -1,4 +1,4 @@
-# Taller UV Mapping: Texturas que Encajan
+# Taller Animación con IA en Unity para Personajes Autónomos
 
 RESPONSABLES AQUI
 
@@ -6,7 +6,7 @@ Fecha de entrega: 28/03/2026
 
 ## Descripción
 
-Explorar el mapeo UV como técnica fundamental para aplicar correctamente texturas 2D sobre modelos 3D sin distorsión. El objetivo es entender cómo se proyectan las texturas y cómo se pueden ajustar las coordenadas UV para mejorar el resultado visual.
+Desarrollar comportamientos autónomos para NPCs en Unity utilizando NavMesh y máquinas de estados finitos con control de animaciones dinámicas.
 
 ## Implementaciónes
 
@@ -39,7 +39,7 @@ NOMBRE: CONTRIBUCION
 ## Estructura del proyecto
 
 ```
-semana_4_1_luces_sombras_radiometria/
+semana_6_1_animacion_ai_unity/
 ├── unity/
 ├── threejs/
 ├── media/

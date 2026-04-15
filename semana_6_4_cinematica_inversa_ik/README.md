@@ -1,22 +1,18 @@
-# Taller UV Mapping: Texturas que Encajan
+# Taller Cinemática Inversa: Haciendo que el Modelo Persiga Objetivos
 
-RESPONSABLES AQUI
+Victor Saa
 
-Fecha de entrega: 28/03/2026
+Fecha de entrega: 15/04/2026
 
 ## Descripción
 
-Explorar el mapeo UV como técnica fundamental para aplicar correctamente texturas 2D sobre modelos 3D sin distorsión. El objetivo es entender cómo se proyectan las texturas y cómo se pueden ajustar las coordenadas UV para mejorar el resultado visual.
+Aplicar cinemática inversa (IK, Inverse Kinematics) para que un modelo 3D alcance un punto objetivo dinámico, como una mano intentando tocar una esfera. Este ejercicio permite comprender cómo una cadena de articulaciones puede ajustarse automáticamente para alcanzar una posición deseada usando algoritmos como CCD o FABRIK.
 
-## Implementaciónes
-
-### Unity
-
-DESCRIPCION DE LA IMPLEMENTACION EN UNITY
+## Implementación
 
 ### Three.js
 
-DESCRIPCION DE LA IMPLEMENTACION EN THREE.JS
+En three.js se implementó un brazo robótico con 3 grados de libertad, cada uno con su propia articulación y rotación. El brazo puede moverse en cualquier dirección del espacio, alcanzando cualquier punto dentro de su alcance. Se utilizó el algoritmo CCD (Cyclic Coordinate Descent) para resolver la cinemática inversa, permitiendo que el brazo alcance el objetivo deseado de manera eficiente.
 
 ## IA
 
@@ -32,15 +28,10 @@ PROMPTS UTILIZADOS AQUI
 
 APRENDIZAJES AQUI
 
-## Contribuciones grupales (si aplica)
-
-NOMBRE: CONTRIBUCION
-
 ## Estructura del proyecto
 
 ```
-semana_4_1_luces_sombras_radiometria/
-├── unity/
+semana_6_4_cinematica_inversa_ik/
 ├── threejs/
 ├── media/
 |    ├── ARCHIVO.gif

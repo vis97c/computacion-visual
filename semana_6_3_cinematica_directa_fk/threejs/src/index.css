@@ -1,33 +1,31 @@
-@media only screen {
-	html,
-	body {
-		height: 100%;
-		width: 100%;
-		overflow: hidden;
-	}
-	body {
-		background-color: #fff;
-		font-family: Verdana, Geneva, Tahoma, sans-serif;
-	}
-	* {
-		margin: 0;
-		padding: 0;
-		position: relative;
-	}
-	button {
-		padding: 0.5rem 1rem;
-		border-radius: 5px;
-		border: none;
-		cursor: pointer;
-		background-color: #000;
-		color: #fff;
-		font-size: 1em;
-		font-weight: bold;
-	}
-	button:hover {
-		opacity: 0.7;
-	}
-	canvas {
-		max-height: 100%;
-	}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+	--bg-primary: #08090d;
+	--bg-secondary: #0f1118;
+	--text-primary: #e4e6f0;
+	--text-secondary: #7c80a0;
+	--accent-blue: #4d8aff;
+	--accent-cyan: #00e5ff;
+	--accent-orange: #ff8a50;
+	--accent-violet: #b06aff;
+	--glass-bg: rgba(14, 16, 24, 0.8);
+	--glass-border: rgba(255, 255, 255, 0.07);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	font-family: 'Inter', -apple-system, sans-serif;
+	background: var(--bg-primary);
+	color: var(--text-primary);
 }

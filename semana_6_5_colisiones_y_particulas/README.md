@@ -1,4 +1,4 @@
-# Taller UV Mapping: Texturas que Encajan
+# Taller Colisiones y Partículas: Reacciones Visuales Interactivas
 
 RESPONSABLES AQUI
 
@@ -6,7 +6,7 @@ Fecha de entrega: 28/03/2026
 
 ## Descripción
 
-Explorar el mapeo UV como técnica fundamental para aplicar correctamente texturas 2D sobre modelos 3D sin distorsión. El objetivo es entender cómo se proyectan las texturas y cómo se pueden ajustar las coordenadas UV para mejorar el resultado visual.
+Aprender a usar Colliders para detectar colisiones entre objetos y disparar efectos visuales con partículas al momento de una interacción. Este taller permitirá a los estudiantes entender el sistema de físicas de Unity y cómo integrarlo con efectos gráficos simples.
 
 ## Implementaciónes
 
@@ -39,7 +39,7 @@ NOMBRE: CONTRIBUCION
 ## Estructura del proyecto
 
 ```
-semana_4_1_luces_sombras_radiometria/
+semana_6_5_colisiones_y_particulas/
 ├── unity/
 ├── threejs/
 ├── media/
