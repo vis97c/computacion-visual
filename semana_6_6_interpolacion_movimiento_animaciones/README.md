@@ -1,6 +1,6 @@
 # Taller Interpolación de Movimiento: Suavizando Animaciones en Tiempo Real
 
-Victor Saa, Jose Arturo Herrera Rivera
+Victor Saa, Jose Arturo Herrera Rivera, Juan Jose Alvarez Lozano
 
 Fecha de entrega: 15/04/2026
 

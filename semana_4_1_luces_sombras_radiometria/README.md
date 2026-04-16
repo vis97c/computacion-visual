@@ -4,6 +4,8 @@ Victor Saa
 
 Jose Arturo Herrera Rivera
 
+Juan Jose Alvarez Lozano
+
 Fecha de entrega: 28/03/2026
 
 ## Descripción

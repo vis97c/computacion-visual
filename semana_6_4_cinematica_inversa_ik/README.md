@@ -1,6 +1,6 @@
 # Taller Cinemática Inversa: Haciendo que el Modelo Persiga Objetivos
 
-Victor Saa, Jose Arturo Herrera Rivera
+Victor Saa, Jose Arturo Herrera Rivera, Juan Jose Alvarez Lozano
 
 Fecha de entrega: 15/04/2026
 

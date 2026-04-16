@@ -1,6 +1,6 @@
 # Taller Colisiones y Partículas: Reacciones Visuales Interactivas
 
-RESPONSABLES AQUI
+RESPONSABLES AQUI, Juan Jose Alvarez Lozano
 
 Fecha de entrega: 28/03/2026
 
