@@ -16,3 +16,10 @@ yarn workspace semana-1-1 run dev
 ```
 
 Los otros archivos son de configuración del proyecto (Linters, formatters, etc.)
+
+En python puedes usar este comando para bloquear dependencias:
+
+```bash
+# See: https://stackoverflow.com/a/40026169
+pip freeze -r requirements.txt | sed '/freeze/,$ d'
+```
