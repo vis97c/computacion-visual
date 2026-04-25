@@ -75,7 +75,10 @@ export function Girl({ animation, onAnimationEnd, ...props }: GirlProps) {
 
 	// Set loop mode for non-looping animations
 	useEffect(() => {
-		if (actions.wave) actions.wave.setLoop(THREE.LoopOnce, 1);
+		if (actions.wave) {
+			actions.wave.setLoop(THREE.LoopRepeat, 3);
+			actions.wave.timeScale = 0.8; // Slightly slower to make it more visible
+		}
 		if (actions.jump) actions.jump.setLoop(THREE.LoopOnce, 1);
 		if (actions.thriller1) actions.thriller1.setLoop(THREE.LoopOnce, 1);
 		if (actions.thriller2) actions.thriller2.setLoop(THREE.LoopOnce, 1);

@@ -18,8 +18,8 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Three.js](media/threejs-week-2.4.gif)
-![Three.js](media/threejs-week-2.4.gif)
+![Animaciones basicas](media/threejs_7_8a.gif)
+![Coreografía Thriller](media/threejs_7_8b.mp4)
 
 ## Prompts utilizados
 
@@ -27,7 +27,7 @@ Aca me ayude de Antigravity construir la escena base del sistema solar.
 
 ## Aprendizajes
 
-APRENDIZAJES AQUI
+Aca fue muy bacano trabajar intercalando animaciones basicas y luego armar una coreografia completa.
 
 ## Estructura del proyecto
 

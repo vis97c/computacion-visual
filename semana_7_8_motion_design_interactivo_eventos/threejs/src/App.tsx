@@ -7,6 +7,22 @@ import "./App.css";
 function App() {
 	const [currentAnim, setCurrentAnim] = useState("idle");
 	const [isThrillerCycle, setIsThrillerCycle] = useState(false);
+	const [audio] = useState(() => new Audio("/thriller.mp3"));
+
+	// Sync audio with thriller cycle
+	useEffect(() => {
+		if (isThrillerCycle) {
+			audio.currentTime = 0;
+			audio.play().catch((err) => console.warn("Audio playback failed:", err));
+		} else {
+			audio.pause();
+			audio.currentTime = 0;
+		}
+
+		return () => {
+			audio.pause();
+		};
+	}, [isThrillerCycle, audio]);
 
 	// Start a specific animation and stop the thriller cycle if active
 	const playAnim = useCallback((name: string) => {
