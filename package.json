@@ -53,6 +53,7 @@
     "semana_6_3_cinematica_directa/threejs",
     "semana_6_4_cinematica_inversa_ik/threejs",
     "semana_6_6_interpolacion_movimiento_animaciones/threejs",
+    "semana_7_1_arquitectura_escenas_navegacion_unity_threejs/threejs",
     "semana_7_8_motion_design_interactivo_eventos/threejs"
   ],
   "devDependencies": {

@@ -1,4 +1,4 @@
-# Taller Motion Design Interactivo: Acciones Visuales según Eventos del Usuario
+# Taller Arquitectura de Juego, Escenas y Navegación en Unity y Three.js
 
 Victor Saa, Juan Jose Alvarez, Juan Pablo Correa, Jose Arturo Herrera Rivera, Manuel Santiago Mori Ardila
 
@@ -6,13 +6,13 @@ Fecha de entrega: 25/04/2026
 
 ## Descripción
 
-Crear animaciones reactivas donde un modelo 3D animado (proveniente de Mixamo) responde a eventos del usuario, como clics, teclas o movimientos del cursor. El objetivo es introducir los fundamentos del motion design aplicado a personajes, integrando eventos y lógica de interacción con animaciones esqueléticas.
+Diseñar una estructura escalable para una aplicación interactiva con múltiples escenas (pantallas) que permita moverse entre menús, niveles o etapas. Este taller enseña cómo organizar el código y los recursos visuales para lograr una navegación fluida y lógica.
 
 ## Implementaciónes
 
 ### Three.js
 
-Se utilizó three.js para la implementación. Se creó una escena con un personaje que puede ser controlado por el usuario. Se usaron eventos del mouse y del teclado para controlar el personaje. También se implemento una coreografía encadenando animaciones.
+Se utilizó three.js para el proyecto. Se creó una escena con un personaje que puede ser controlado por el usuario. Se usaron eventos del mouse y del teclado para controlar el personaje.
 
 ```bash
 cd threejs
