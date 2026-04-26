@@ -41,106 +41,118 @@ body {
 	height: 100%;
 }
 
-.overlay {
+.ui-overlay {
 	position: absolute;
-	top: 2.5rem;
-	left: 2.5rem;
+	top: 20px;
+	left: 20px;
 	z-index: 10;
-	pointer-events: none;
-	background: rgba(0, 0, 0, 0.4);
-	padding: 1.5rem;
-	border-radius: 1rem;
-	backdrop-filter: blur(8px);
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	display: flex;
+	gap: 10px;
 }
 
-.overlay h1 {
-	font-size: 1.8rem;
-	font-weight: 800;
-	letter-spacing: -0.02em;
-	background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+.btn-primary, .btn-secondary {
+	padding: 10px 20px;
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+	font-weight: 500;
+	transition: background-color 0.2s ease;
+}
+
+.btn-secondary {
+	background-color: #333;
+}
+.btn-secondary:hover {
+	background-color: #444;
+}
+
+.btn-primary {
+	background-color: #007bff;
+}
+.btn-primary:hover {
+	background-color: #0056b3;
+}
+
+.bg-black {
+	background-color: black !important;
+}
+
+/* Estilos Premium para el Menú (Glassmorphism) */
+.canvas-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+
+.menu-overlay {
+	position: relative;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.menu-card {
+	background: rgba(15, 15, 15, 0.4);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	padding: 3.5rem 4rem;
+	border-radius: 20px;
+	box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6);
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	animation: fadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; transform: translateY(30px) scale(0.95); }
+	to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.menu-title {
+	font-size: 4rem;
+	font-weight: 900;
+	margin-bottom: 0.5rem;
+	background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	margin-bottom: 0.5rem;
+	text-transform: uppercase;
+	letter-spacing: 6px;
+	line-height: 1.2;
 }
 
-.overlay p {
-	color: #94a3b8;
-	font-size: 0.9rem;
-	font-weight: 500;
+.menu-subtitle {
+	font-size: 1.1rem;
+	color: #b0b0b0;
+	margin-bottom: 2.5rem;
+	letter-spacing: 3px;
+	text-transform: uppercase;
 }
 
-.matrix-panel {
-	position: absolute;
-	bottom: 2rem;
-	right: 2rem;
-	background: var(--panel-bg);
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
-	border: 1px solid var(--glass-border);
-	border-radius: 1rem;
-	padding: 1.5rem;
-	color: white;
-	font-family: "Monaco", "Consolas", monospace;
-	font-size: 0.8rem;
-	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-	pointer-events: auto;
-	transition: transform 0.3s ease;
+.menu-options-container {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	width: 100%;
 }
 
-.matrix-panel:hover {
-	transform: translateY(-5px);
+.btn-game-start {
+	font-size: 1.1rem;
+	padding: 16px 30px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
 }
 
-.matrix-grid {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 0.5rem;
-	margin-top: 1rem;
-}
-
-.matrix-cell {
-	background: rgba(255, 255, 255, 0.05);
-	padding: 0.6rem;
-	border-radius: 0.5rem;
-	text-align: center;
-	min-width: 80px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	color: white;
-	cursor: pointer;
-	transition: all 0.2s ease;
-	font-weight: 500;
-}
-
-.matrix-cell:hover {
-	background: rgba(255, 255, 255, 0.15);
-	border-color: var(--accent-color);
-	transform: scale(1.05);
-}
-
-.matrix-cell:active {
-	transform: scale(0.95);
-}
-
-.label {
-	color: #888;
-	margin-bottom: 0.5rem;
-	display: block;
-}
-
-#canvas-options {
-	position: absolute;
-	top: 2rem;
-	right: 2rem;
-	background: var(--panel-bg);
-	backdrop-filter: blur(12px);
-	border: 1px solid var(--glass-border);
-	padding: 1rem;
-	border-radius: 0.75rem;
-	list-style: none;
-}
-
-#canvas-options li {
-	font-size: 0.9rem;
-	color: #aaa;
+.btn-game-start:hover {
+	box-shadow: 0 0 30px rgba(0, 123, 255, 0.6);
+	transform: translateY(-2px);
 }

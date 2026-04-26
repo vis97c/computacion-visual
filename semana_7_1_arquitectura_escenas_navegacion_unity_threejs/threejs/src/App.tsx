@@ -1,26 +1,17 @@
-import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Routes, Route } from "react-router-dom";
+import Menu from "./components/Menu";
+import Juego from "./components/Juego";
+import Creditos from "./components/Creditos";
+
 import "./App.css";
 
 function App() {
 	return (
-		<main id="container">
-			<section id="canvas-container">
-				<Canvas camera={{ position: [0, 2, 5], fov: 45 }}>
-					<Suspense fallback={null}>
-						<OrbitControls
-							makeDefault
-							minDistance={2}
-							maxDistance={10}
-							target={[0, 1, 0]}
-						/>
-						<Environment preset="city" />
-						<gridHelper args={[20, 20, 0x333333, 0x111111]} position={[0, 0, 0]} />
-					</Suspense>
-				</Canvas>
-			</section>
-		</main>
+		<Routes>
+			<Route path="/" element={<Menu />} />
+			<Route path="/juego" element={<Juego />} />
+			<Route path="/creditos" element={<Creditos />} />
+		</Routes>
 	);
 }
 

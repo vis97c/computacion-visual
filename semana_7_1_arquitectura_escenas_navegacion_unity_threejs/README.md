@@ -10,9 +10,11 @@ Diseñar una estructura escalable para una aplicación interactiva con múltiple
 
 ## Implementaciónes
 
+### Unity
+
 ### Three.js
 
-Se utilizó three.js para el proyecto. Se creó una escena con un personaje que puede ser controlado por el usuario. Se usaron eventos del mouse y del teclado para controlar el personaje.
+Se utilizó three.js para el proyecto. Se crearon tres escenas interconectadas.
 
 ```bash
 cd threejs
@@ -32,8 +34,8 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Animaciones basicas](media/threejs_7_8a.gif)
-![Coreografía Thriller](media/threejs_7_8b.mp4)
+![Menu](media/threejs_7_1a.gif)
+![Creditos](media/threejs_7_1b.gif)
 
 ## Prompts utilizados
 
@@ -41,12 +43,13 @@ Aca me ayude de Antigravity construir la escena base del sistema solar.
 
 ## Aprendizajes
 
-Aca fue muy bacano trabajar intercalando animaciones basicas y luego armar una coreografia completa.
+Aca toco revisar como implementar el router de react. Se uso todo lo previamente usado para generar las escenas y la navegacion entre ellas.
 
 ## Estructura del proyecto
 
 ```
-semana_7_8_motion_design_interactivo_eventos/
+semana_7_1_arquitectura_escenas_navegacion_unity_threejs/
+├── unity/
 ├── threejs/
 ├── media/ # Imágenes, videos, GIFs de resultados
 └── README.md
