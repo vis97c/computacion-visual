@@ -52,7 +52,8 @@
     "semana_6_2_animaciones_esqueleto_fbx_gltf/threejs",
     "semana_6_3_cinematica_directa/threejs",
     "semana_6_4_cinematica_inversa_ik/threejs",
-    "semana_6_6_interpolacion_movimiento_animaciones/threejs"
+    "semana_6_6_interpolacion_movimiento_animaciones/threejs",
+    "semana_7_8_motion_design_interactivo_eventos/threejs"
   ],
   "devDependencies": {
     "@open-xamu-co/eslint-config": "^3.0.1",

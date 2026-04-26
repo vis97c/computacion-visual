@@ -7051,23 +7051,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"semana-6-2@workspace:semana_6_2_animaciones_esqueleto_fbx_gltf/threejs":
-  version: 0.0.0-use.local
-  resolution: "semana-6-2@workspace:semana_6_2_animaciones_esqueleto_fbx_gltf/threejs"
-  dependencies:
-    "@react-three/drei": "npm:^10.7.7"
-    "@react-three/fiber": "npm:^9.5.0"
-    "@react-three/postprocessing": "npm:^3.0.4"
-    "@vitejs/plugin-react": "npm:^5.1.1"
-    leva: "npm:^0.10.1"
-    postprocessing: "npm:^6.38.3"
-    react: "npm:^19.2.0"
-    react-dom: "npm:^19.2.0"
-    three: "npm:^0.182.0"
-    vite: "npm:^7.3.1"
-  languageName: unknown
-  linkType: soft
-
 "semana-6-4@workspace:semana_6_4_cinematica_inversa_ik/threejs":
   version: 0.0.0-use.local
   resolution: "semana-6-4@workspace:semana_6_4_cinematica_inversa_ik/threejs"
@@ -7095,6 +7078,20 @@ __metadata:
     "@vitejs/plugin-react": "npm:^5.1.1"
     leva: "npm:^0.10.1"
     postprocessing: "npm:^6.38.3"
+    react: "npm:^19.2.0"
+    react-dom: "npm:^19.2.0"
+    three: "npm:^0.182.0"
+    vite: "npm:^7.3.1"
+  languageName: unknown
+  linkType: soft
+
+"semana-7-8@workspace:semana_7_8_motion_design_interactivo_eventos/threejs":
+  version: 0.0.0-use.local
+  resolution: "semana-7-8@workspace:semana_7_8_motion_design_interactivo_eventos/threejs"
+  dependencies:
+    "@react-three/drei": "npm:^10.7.7"
+    "@react-three/fiber": "npm:^9.5.0"
+    "@vitejs/plugin-react": "npm:^5.1.1"
     react: "npm:^19.2.0"
     react-dom: "npm:^19.2.0"
     three: "npm:^0.182.0"
