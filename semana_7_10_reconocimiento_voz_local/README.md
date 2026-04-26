@@ -217,16 +217,3 @@ semana_7_10_reconocimiento_voz_local/
 - PyGame-CE Repositorio: https://pyga.me/docs/
 
 ---
-
-## Checklist de entrega
-
-- [x] Carpeta con nombre `semana_7_10_reconocimiento_voz_local`
-- [x] Scripts limpios y comentados en `python/`
-- [x] Creado un Script Adicional Mock Receptor para facilitar correcciones
-- [x] README general en formato estandarizado
-- [x] Multitreading / Diagrama funcional
-- [x] Feedback y Respuestas Auditivas aplicadas (PyTTSx3)
-- [x] Sistema reaccional para envío al puerto `5005` (OSC protocol)
-- [ ] Incorporar la recepción Unity / Proccesing (opcional extendido)
-- [ ] Commits descriptivos en inglés
-- [ ] Repositorio organizado y público
