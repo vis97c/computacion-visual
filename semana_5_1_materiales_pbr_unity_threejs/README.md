@@ -1,6 +1,6 @@
 # Taller Materiales Realistas: Introducción a PBR en Unity y Three.js
 
-Jose Arturo Herrera Rivera
+Jose Arturo Herrera Rivera, Juan Jose Alvarez
 
 Fecha de entrega: 28/03/2026
 

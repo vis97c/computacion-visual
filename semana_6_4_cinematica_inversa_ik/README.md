@@ -1,0 +1,55 @@
+# Taller Cinemática Inversa: Haciendo que el Modelo Persiga Objetivos
+
+Victor Saa, Jose Arturo Herrera Rivera, Juan Jose Alvarez Lozano
+
+Fecha de entrega: 15/04/2026
+
+## Descripción
+
+Aplicar cinemática inversa (IK, Inverse Kinematics) para que un modelo 3D alcance un punto objetivo dinámico, como una mano intentando tocar una esfera. Este ejercicio permite comprender cómo una cadena de articulaciones puede ajustarse automáticamente para alcanzar una posición deseada usando algoritmos como CCD o FABRIK.
+
+## Implementación
+
+### Three.js
+
+En three.js se implementó un brazo robótico con 3 grados de libertad, cada uno con su propia articulación y rotación. El brazo puede moverse en cualquier dirección del espacio, alcanzando cualquier punto dentro de su alcance. Se utilizó el algoritmo CCD (Cyclic Coordinate Descent) para resolver la cinemática inversa, permitiendo que el brazo alcance el objetivo deseado de manera eficiente.
+
+## IA
+
+IDE, prompts y autocompletado: Antigravity
+
+## Resultados visuales
+
+![Interaccion brazo robotico con objetivo](media/threejs-week-6-4.gif)
+![Modificando los parametros](media/threejs-week-6-4b.gif)
+
+## Prompts utilizados
+
+Se le pidio a antigravity implementar el algoritmo de seguimiento de objetivo mediante cinemática inversa.
+
+## Aprendizajes
+
+Aca pude entender mejor como funciona la cinemática inversa y como se puede implementar en un entorno 3D. Lo mas complejo es eliminar el overshoot del brazo, es decir, que no se pase del objetivo y se vuelva loca la animación. Realmente no lo pude eliminar del todo, pero si lo reduje bastante.
+
+## Estructura del proyecto
+
+```
+semana_6_4_cinematica_inversa_ik/
+├── threejs/
+├── media/
+|    ├── threejs-week-6-4.gif
+|    ├── threejs-week-6-4b.gif
+└── README.md
+```
+
+---
+
+## Referencias
+
+Lista las fuentes, tutoriales, documentación o papers consultados durante el desarrollo:
+
+- Documentación oficial de Unity: https://docs.unity3d.com/Manual/
+- Tutorial de React Three Fiber: https://docs.pmnd.rs/react-three-fiber/
+- Leva (React UI controls): https://leva.pmnd.rs/
+
+---
