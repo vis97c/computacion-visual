@@ -1,0 +1,162 @@
+[
+  {
+    "stage": "lucas_kanade_sparse",
+    "processing_ms": 19971.168799995212,
+    "fps": 30.04330923286492,
+    "extra": {
+      "frames_processed": 600,
+      "redetections": 1
+    },
+    "note": ""
+  },
+  {
+    "stage": "farneback_dense",
+    "processing_ms": 29843.178999988595,
+    "fps": 20.10509671239211,
+    "extra": {
+      "frames_processed": 600
+    },
+    "note": ""
+  },
+  {
+    "stage": "object_tracking",
+    "processing_ms": 19903.45690000686,
+    "fps": 30.1455170835069,
+    "extra": {
+      "frames_processed": 600,
+      "times_lost": 0,
+      "occlusion_events": 0
+    },
+    "note": ""
+  },
+  {
+    "stage": "camera_motion_estimation",
+    "processing_ms": 19966.190000006463,
+    "fps": 30.05080087887603,
+    "extra": {
+      "frames_processed": 600,
+      "motion_summary": {
+        "ESTATICO": 97,
+        "PAN ←": 36,
+        "PAN ← + TILT ↑": 99,
+        "PAN ← + TILT ↑ + ZOOM IN": 14,
+        "PAN ← + TILT ↑ + ZOOM OUT": 9,
+        "PAN ← + TILT ↓": 17,
+        "PAN ← + TILT ↓ + ZOOM IN": 10,
+        "PAN ← + TILT ↓ + ZOOM OUT": 5,
+        "PAN ← + ZOOM IN": 9,
+        "PAN ← + ZOOM OUT": 6,
+        "PAN →": 25,
+        "PAN → + TILT ↑": 6,
+        "PAN → + TILT ↑ + ZOOM IN": 1,
+        "PAN → + TILT ↑ + ZOOM OUT": 6,
+        "PAN → + TILT ↓": 106,
+        "PAN → + TILT ↓ + ZOOM IN": 5,
+        "PAN → + TILT ↓ + ZOOM OUT": 13,
+        "PAN → + ZOOM IN": 7,
+        "PAN → + ZOOM OUT": 7,
+        "TILT ↑": 48,
+        "TILT ↑ + ZOOM IN": 8,
+        "TILT ↓": 57,
+        "TILT ↓ + ZOOM IN": 1,
+        "TILT ↓ + ZOOM OUT": 7,
+        "ZOOM IN": 1
+      }
+    },
+    "note": ""
+  },
+  {
+    "stage": "motion_detection",
+    "processing_ms": 29667.837000015425,
+    "fps": 20.223921278780384,
+    "extra": {
+      "frames_processed": 600,
+      "max_objects_detected": 9,
+      "magnitude_threshold": 2.5,
+      "min_contour_area": 500
+    },
+    "note": ""
+  },
+  {
+    "stage": "performance_analysis",
+    "processing_ms": 32932.52509998274,
+    "fps": 0.0,
+    "extra": {
+      "lucas_kanade": {
+        "LK win=11 lev=2": {
+          "avg_ms": 3.424489166839824,
+          "fps": 292.0143563843762,
+          "avg_tracked_ratio": 0.2284552845528456,
+          "frames": 120
+        },
+        "LK win=21 lev=3": {
+          "avg_ms": 5.401986667129677,
+          "fps": 185.11708036690615,
+          "avg_tracked_ratio": 1.0,
+          "frames": 120
+        },
+        "LK win=31 lev=4": {
+          "avg_ms": 2.9667175011127256,
+          "fps": 337.07287587204723,
+          "avg_tracked_ratio": 0.9953703703703702,
+          "frames": 120
+        }
+      },
+      "farneback": {
+        "FB win=9 lev=2": {
+          "avg_ms": 38.92176750135453,
+          "fps": 25.692563935211798,
+          "avg_flow_magnitude": 0.1483609875039595,
+          "frames": 120
+        },
+        "FB win=15 lev=3": {
+          "avg_ms": 38.85238833366505,
+          "fps": 25.738443449395724,
+          "avg_flow_magnitude": 0.15460887508417423,
+          "frames": 120
+        },
+        "FB win=21 lev=5": {
+          "avg_ms": 38.49746999912895,
+          "fps": 25.97573295135047,
+          "avg_flow_magnitude": 0.17502803762896899,
+          "frames": 120
+        }
+      }
+    },
+    "note": ""
+  },
+  {
+    "stage": "bonus_stabilization",
+    "processing_ms": 19999.36549999984,
+    "fps": 30.000951780195468,
+    "extra": {
+      "frames_processed": 600
+    },
+    "note": ""
+  },
+  {
+    "stage": "bonus_motion_blur",
+    "processing_ms": 37506.62190001458,
+    "fps": 15.997175154816242,
+    "extra": {
+      "frames_processed": 600
+    },
+    "note": ""
+  },
+  {
+    "stage": "bonus_gesture_detection",
+    "processing_ms": 19969.464100024197,
+    "fps": 30.045873889989515,
+    "extra": {
+      "frames_processed": 600,
+      "total_gestures": 21,
+      "gesture_counts": {
+        "up": 6,
+        "right": 5,
+        "down": 6,
+        "left": 4
+      }
+    },
+    "note": ""
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "detector": "sift",
+  "ratio_test": 0.75,
+  "ransac_thresh": 4.0,
+  "stages": [
+    {
+      "stage": "matching_bf",
+      "total_matches": 2000,
+      "good_matches": 480,
+      "inliers": 0,
+      "inlier_ratio": 0.0,
+      "processing_ms": 186.5539999998873,
+      "note": ""
+    },
+    {
+      "stage": "matching_flann",
+      "total_matches": 2000,
+      "good_matches": 482,
+      "inliers": 0,
+      "inlier_ratio": 0.0,
+      "processing_ms": 133.1590999980108,
+      "note": ""
+    },
+    {
+      "stage": "homografia_ransac",
+      "total_matches": 482,
+      "good_matches": 482,
+      "inliers": 351,
+      "inlier_ratio": 0.7282157676348547,
+      "processing_ms": 83.07369999965886,
+      "note": "Matriz H: [[    1.2491     0.0007 -1521.3234]\n [    0.0813     1.1622  -176.8247]\n [    0.0001     0.         1.    ]]"
+    },
+    {
+      "stage": "deteccion_objeto_homografia",
+      "total_matches": 2001,
+      "good_matches": 710,
+      "inliers": 691,
+      "inlier_ratio": 0.9732394366197183,
+      "processing_ms": 2233.4977999998955,
+      "note": ""
+    },
+    {
+      "stage": "stitching_panorama",
+      "total_matches": 2000,
+      "good_matches": 276,
+      "inliers": 182,
+      "inlier_ratio": 0.6594202898550725,
+      "processing_ms": 15533.957999999984,
+      "note": "Bonus activo: panorama con feather blending."
+    }
+  ]
+}
