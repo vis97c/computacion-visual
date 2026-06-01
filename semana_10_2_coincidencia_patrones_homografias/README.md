@@ -1,7 +1,10 @@
 # Taller Coincidencia Patrones Homografias
 
-**Nombre del estudiante:** [Completar nombre]  
-**Fecha de entrega:** 2026-05-18
+Victor Saa, Juan Jose Alvarez, Juan Pablo Correa, Jose Arturo Herrera Rivera, Manuel Santiago Mori Ardila
+
+Fecha de entrega: 2026-05-18
+
+---
 
 ## Descripción breve
 
