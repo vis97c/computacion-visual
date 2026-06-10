@@ -36,7 +36,6 @@ Durante el desarrollo del taller se utilizaron prompts dirigidos a Claude para r
 
 ### Análisis de Bandas Espectrales — Imagen Landsat
 
-![Análisis de imagen satelital](analisis_satelital.png)
 
 Se analizó la imagen satelital GeoTIFF descargada desde el repositorio oficial de `rasterio`, correspondiente a una escena Landsat del Caribe. La figura generada presentó seis paneles: las tres bandas espectrales individuales (rojo, verde y azul) normalizadas con estiramiento percentil 2–98, la composición color real RGB, el histograma de densidad por banda y el mapa de luminancia ponderada en escala de calor.
 
