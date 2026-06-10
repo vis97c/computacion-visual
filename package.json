@@ -54,7 +54,8 @@
     "semana_6_4_cinematica_inversa_ik/threejs",
     "semana_6_6_interpolacion_movimiento_animaciones/threejs",
     "semana_7_1_arquitectura_escenas_navegacion_unity_threejs/threejs",
-    "semana_7_8_motion_design_interactivo_eventos/threejs"
+    "semana_7_8_motion_design_interactivo_eventos/threejs",
+    "Proyecto"
   ],
   "devDependencies": {
     "@open-xamu-co/eslint-config": "^3.0.1",
