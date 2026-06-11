@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  /* Color Palette - Premium Dark Mode */
+  --bg-main: hsl(224, 71%, 4%);
+  --bg-card: hsla(224, 40%, 8%, 0.65);
+  --bg-card-hover: hsla(224, 40%, 12%, 0.85);
+  --border-color: hsla(224, 30%, 18%, 0.75);
+  --border-focus: hsla(217, 91%, 60%, 0.5);
+
+  --text-primary: hsl(210, 40%, 96%);
+  --text-secondary: hsl(215, 20%, 65%);
+  --text-muted: hsl(215, 12%, 45%);
+
+  --primary: hsl(217, 91%, 60%);
+  --primary-glow: hsla(217, 91%, 60%, 0.15);
+
+  /* Class Neon Accent Colors */
+  --color-pellet: hsl(142, 72%, 50%);
+  --color-pellet-glow: hsla(142, 72%, 50%, 0.15);
+
+  --color-fibra: hsl(354, 70%, 54%);
+  --color-fibra-glow: hsla(354, 70%, 54%, 0.15);
+
+  --color-fragmento: hsl(24, 95%, 53%);
+  --color-fragmento-glow: hsla(24, 95%, 53%, 0.15);
+
+  --color-pelicula: hsl(300, 70%, 50%);
+  --color-pelicula-glow: hsla(300, 70%, 50%, 0.15);
+
+  --color-espuma: hsl(50, 95%, 50%);
+  --color-espuma-glow: hsla(50, 95%, 50%, 0.15);
+
+  --color-no-plastic: hsl(215, 16%, 60%);
+  --color-no-plastic-glow: hsla(215, 16%, 60%, 0.15);
+
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --backdrop-blur: blur(16px);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(at 0% 0%, hsla(217, 91%, 60%, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(300, 70%, 50%, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-fade {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Premium Layout Utilities */
+.glass-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition-smooth);
+}
+
+.glass-panel:hover {
+  border-color: hsla(224, 30%, 25%, 0.8);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-primary {
+  background: linear-gradient(135deg, hsl(217, 91%, 60%) 0%, hsl(300, 70%, 50%) 100%);
+  -webkit-text-fill-color: transparent;
+}
+
+/* Class Tags and Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid transparent;
+}
+
+.badge-Pellet {
+  background: var(--color-pellet-glow);
+  color: var(--color-pellet);
+  border-color: hsla(142, 72%, 50%, 0.3);
+}
+
+.badge-Fibra {
+  background: var(--color-fibra-glow);
+  color: var(--color-fibra);
+  border-color: hsla(354, 70%, 54%, 0.3);
+}
+
+.badge-Fragmento {
+  background: var(--color-fragmento-glow);
+  color: var(--color-fragmento);
+  border-color: hsla(24, 95%, 53%, 0.3);
+}
+
+.badge-Pelicula {
+  background: var(--color-pelicula-glow);
+  color: var(--color-pelicula);
+  border-color: hsla(300, 70%, 50%, 0.3);
+}
+
+.badge-Espuma {
+  background: var(--color-espuma-glow);
+  color: var(--color-espuma);
+  border-color: hsla(50, 95%, 50%, 0.3);
+}
+
+.badge-No-Microplastico {
+  background: var(--color-no-plastic-glow);
+  color: var(--color-no-plastic);
+  border-color: hsla(215, 16%, 60%, 0.3);
+}

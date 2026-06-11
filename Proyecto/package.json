@@ -1,0 +1,66 @@
+{
+  "name": "microplasticos",
+  "version": "1.0.0",
+  "description": "Pipeline de identificacion de microplasticos",
+  "keywords": [
+    "microplastics",
+    "ceroplastic",
+    "ai"
+  ],
+  "homepage": "https://github.com/vis97c/microplastics-vision-v1#readme",
+  "bugs": {
+    "url": "https://github.com/vis97c/microplastics-vision-v1/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vis97c/microplastics-vision-v1.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.3",
+    "npm": ">=10.2.4"
+  },
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "lint:eslint": "eslint --ext .ts,.js,.jsx,.tsx --ignore-path .gitignore .",
+    "lint:prettier": "prettier . --check --ignore-unknown",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "install:backend": "pip install -r backend/requirements.txt",
+    "install:front": "npm ci --prefix frontend",
+    "install:all": "npm run install:backend && npm run install:front",
+    "dev:backend": "python backend/app.py",
+    "dev:front": "npm run dev --prefix frontend",
+    "dev": "npx -y concurrently -n backend,front -c blue,green \"npm run dev:backend\" \"npm run dev:front\"",
+    "prepare": "node .husky/install.mjs"
+  },
+  "devDependencies": {
+    "@open-xamu-co/eslint-config": "^3.0.1",
+    "@types/node": "^20.19.3",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.37.5",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "typescript": "^5.9.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}
